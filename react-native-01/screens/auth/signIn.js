@@ -14,7 +14,7 @@ const LoginScreen = () => {
     try {
       console.log('Logging in with:', { username, password });
   
-      const response = await signIn(username, password); // Call the API
+      const response = await signIn(username, password); 
       const { token, user } = response.data;
   
       if (token) {
@@ -22,14 +22,14 @@ const LoginScreen = () => {
   
         // Store user login info in AsyncStorage
         await AsyncStorage.setItem('isLoggedIn', 'true');
-        await AsyncStorage.setItem('userToken', token); // Save the JWT token
-        await AsyncStorage.setItem('username', username);
+        await AsyncStorage.setItem('userToken', token); 
+        await AsyncStorage.setItem('user',JSON.stringify(user));
         console.log('Username saved:', username);
   
-        // Navigate based on role (assuming role-based navigation, or adapt as needed)
-        navigation.navigate('Home'); // Adjust to target destination
+        
+        navigation.navigate('Home'); 
       } else {
-        // If no token is returned, show an error
+        
         throw new Error('Invalid username or password');
       }
     } catch (error) {

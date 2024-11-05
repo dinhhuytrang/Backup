@@ -9,7 +9,7 @@ const UserSchema = new Schema({
   phoneNumber: { type: String},
   address: { type: String },
   role: { type: String, enum: ['USER', 'ADMIN'], default:"USER"},
-  verificationCode: { type: String, default: null },
+  resetCode: { type: String, default: null },
 });
 
 module.exports = mongoose.model('user', UserSchema);

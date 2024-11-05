@@ -1,28 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { changePassword } from '../../services/Authentication'; // Assuming this is the API to change password
 
-const VerificationScreen = ({ navigation }) => {
-  const [code, setCode] = useState(['', '', '', '']);
-  const [timer, setTimer] = useState(120);
+const ChangePasswordScreen = ({ navigation }) => {
+  const [resetCode, setResetCode] = useState(''); // State for reset code
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
-  useEffect(() => {
-    const countdown = setInterval(() => {
-      if (timer > 0) {
-        setTimer(prevTimer => prevTimer - 1);
+  const handleChangePassword = async () => {
+    try {
+      if (newPassword === confirmNewPassword) {
+        // Call changePassword with resetCode instead of currentPassword
+        const response = await changePassword(resetCode, newPassword, confirmNewPassword);
+
+        console.log('Password changed successfully:', response.data);
+        // Navigate to the Sign In screen after successful password change
+        navigation.navigate('SignIn');
+      } else {
+        console.error('Passwords do not match');
+        // Show an error message to the user (you might want to use a Toast or Alert)
       }
-    }, 1000);
-
-    return () => clearInterval(countdown);
-  }, [timer]);
-
-  const handleCodeInput = (text, index) => {
-    const newCode = [...code];
-    newCode[index] = text;
-    setCode(newCode);
-  };
-
-  const handleVerify = () => {
-    console.log('Verification code:', code.join(''));
+    } catch (error) {
+      console.error('Password change failed:', error.response ? error.response.data : error.message);
+      // Show an error message to the user
+    }
   };
 
   return (
@@ -35,35 +36,53 @@ const VerificationScreen = ({ navigation }) => {
           }}
           style={styles.logo}
         />
-        <Text style={styles.title}>Verification</Text>
-        <Text style={styles.subtitle}>
-          We have sent a code to your email {'\n'} example@gmail.com
-        </Text>
+        <Text style={styles.title}>Change Password</Text>
+        <Text style={styles.note}>Check the password sent to your email!</Text>
       </View>
 
       {/* Bottom Section with rounded top corners */}
       <View style={styles.bottomSection}>
-        <Text style={styles.label}>CODE</Text>
-        <View style={styles.codeInputContainer}>
-          {code.map((digit, index) => (
-            <TextInput
-              key={index}
-              style={styles.codeInput}
-              maxLength={1}
-              keyboardType="number-pad"
-              value={digit}
-              onChangeText={text => handleCodeInput(text, index)}
-            />
-          ))}
-        </View>
-        <TouchableOpacity disabled={timer > 0} onPress={() => setTimer(120)}>
-          <Text style={styles.resendText}>Resend {timer > 0 ? `in ${timer} sec` : ''}</Text>
+        <Text style={styles.label}>RESET CODE</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your reset code"
+          placeholderTextColor="#B0B0B0"
+          value={resetCode}
+          onChangeText={setResetCode}
+        />
+
+        <Text style={styles.label}>NEW PASSWORD</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="********"
+          placeholderTextColor="#B0B0B0"
+          secureTextEntry
+          value={newPassword}
+          onChangeText={setNewPassword}
+        />
+
+        <Text style={styles.label}>CONFIRM NEW PASSWORD</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="********"
+          placeholderTextColor="#B0B0B0"
+          secureTextEntry
+          value={confirmNewPassword}
+          onChangeText={setConfirmNewPassword}
+        />
+
+        {/* Change Password Button */}
+        <TouchableOpacity style={styles.changeButton} onPress={handleChangePassword}>
+          <Text style={styles.changeButtonText}>CHANGE PASSWORD</Text>
         </TouchableOpacity>
 
-        {/* Verify Button */}
-        <TouchableOpacity style={styles.verifyButton} onPress={handleVerify}>
-          <Text style={styles.verifyButtonText}>VERIFY</Text>
-        </TouchableOpacity>
+        {/* Log In Option */}
+        <View style={styles.signInContainer}>
+          <Text>Remembered your password?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+            <Text style={styles.signInText}> LOG IN</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -90,11 +109,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
-  subtitle: {
-    color: '#B0B0B0',
-    textAlign: 'center',
-    marginTop: 10,
-  },
   bottomSection: {
     flex: 1,
     backgroundColor: 'white', // White background
@@ -107,36 +121,41 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 10,
   },
-  codeInputContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  codeInput: {
-    width: 50,
+  input: {
+    width: '100%',
     height: 50,
     backgroundColor: '#F1F1F1',
-    textAlign: 'center',
-    fontSize: 24,
     borderRadius: 10,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    marginBottom: 20,
     color: '#333',
   },
-  resendText: {
-    color: 'black',
-    textAlign: 'center',
-    marginBottom: 20,
+  note: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'white',
   },
-  verifyButton: {
+  changeButton: {
     backgroundColor: '#000',
     paddingVertical: 15,
     borderRadius: 10,
     alignItems: 'center',
   },
-  verifyButtonText: {
+  changeButtonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
   },
+  signInContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+  signInText: {
+    color: '#1B1C29',
+    fontWeight: 'bold',
+  },
 });
 
-export default VerificationScreen;
+export default ChangePasswordScreen;

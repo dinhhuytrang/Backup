@@ -1,15 +1,50 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity, FlatList, Alert, ActivityIndicator } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { viewProfile } from '../../services/UserAPI';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+
 const ProfileScreen = () => {
-  const profileData = {
-    name: 'RYAN HIERRO',
-    email: 'hierroryan@gmail.com',
-    phone: '121-224-7890',
-    imageUrl: 'https://static.vecteezy.com/system/resources/thumbnails/025/337/669/small_2x/default-male-avatar-profile-icon-social-media-chatting-online-user-free-vector.jpg' // You can replace this with the actual image URL
+  const [profileData, setProfileData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const navigation = useNavigation();
+
+  const fetchProfile = async () => {
+    try {
+      const userId = await AsyncStorage.getItem('userId');
+      if (!userId) {
+        Alert.alert('Error', 'No user ID found');
+        return;
+      }
+
+      // Use viewProfile function from UserAPI
+      const response = await viewProfile(userId);
+      setProfileData(response.data);
+    } catch (error) {
+      console.error('Failed to fetch profile:', error.message);
+      Alert.alert('Error', 'Failed to fetch profile');
+    } finally {
+      setLoading(false);
+    }
   };
-const navigation = useNavigation();
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
+
+  if (!profileData) {
+    return (
+      <View style={styles.container}>
+        <Text>No profile data available</Text>
+      </View>
+    );
+  }
+
   const menuItems = [
     { id: '1', title: 'Address', screen: 'MyAddress' }, 
     { id: '2', title: 'Card', screen: 'AddCardScreen' },
@@ -17,7 +52,7 @@ const navigation = useNavigation();
     { id: '4', title: 'Order History', screen: 'History' },
     { id: '5', title: 'Support', screen: 'Support' },
   ];
-  
+
   const renderMenuItem = ({ item }) => (
     <TouchableOpacity
       style={styles.menuItem}
@@ -31,22 +66,24 @@ const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-          <TouchableOpacity onPress={()=>navigation.navigate('Home')}>
-            <Ionicons name="chevron-back-outline" size={30} />
-          </TouchableOpacity>
-        
-
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <Ionicons name="chevron-back-outline" size={30} />
+        </TouchableOpacity>
         <Text style={styles.headerTitle}>Profile</Text>
         <Ionicons name="ellipsis-horizontal" size={30} />
       </View>
+      
       <View style={styles.profileContainer}>
-        <Image source={{ uri: profileData.imageUrl }} style={styles.profileImage} />
+        <Image 
+          source={{ uri: profileData.imageUrl || 'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3467.jpg' }} 
+          style={styles.profileImage} 
+        />
         <View style={styles.profileDetails}>
-          <Text style={styles.profileName}>{profileData.name}</Text>
+          <Text style={styles.profileName}>{profileData.username}</Text>
           <Text style={styles.profileEmail}>{profileData.email}</Text>
-          <Text style={styles.profilePhone}>{profileData.phone}</Text>
+          <Text style={styles.profilePhone}>{profileData.phoneNumber}</Text>
         </View>
-        <TouchableOpacity onPress={()=>navigation.navigate('EditProfile')}>
+        <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
           <Text style={styles.editText}>Edit</Text>
         </TouchableOpacity>
       </View>
@@ -58,11 +95,22 @@ const navigation = useNavigation();
         contentContainerStyle={styles.menuList}
       />
 
-      <TouchableOpacity style={styles.signOutButton}>
+      <TouchableOpacity style={styles.signOutButton} onPress={() => handleSignOut()}>
         <Text style={styles.signOutText}>Sign Out</Text>
       </TouchableOpacity>
     </View>
   );
+};
+
+// Sign-out handler placeholder
+const handleSignOut = async () => {
+  try {
+    await AsyncStorage.removeItem('userId');
+    await AsyncStorage.removeItem('userToken');
+    navigation.navigate('Login'); // Adjust based on your navigation setup
+  } catch (error) {
+    Alert.alert('Error', 'Failed to sign out');
+  }
 };
 
 const styles = StyleSheet.create({

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Tạo một instance axios với cấu hình cơ bản
 const instance = axios.create({
-  baseURL: 'http://192.168.0.101:9999',
+  baseURL: 'http://192.168.137.1:9999',
 });
 
 // Thêm interceptor để xử lý lỗi

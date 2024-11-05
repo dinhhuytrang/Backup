@@ -1,23 +1,62 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // For icons (make sure to install expo vector icons)
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image, Alert, ActivityIndicator, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-const ProfileScreen = () => {
-  const [username, setUsername] = useState('yANCHUI');
-  const [email, setEmail] = useState('yanchui@gmail.com');
-  const [phoneNumber, setPhoneNumber] = useState('+14987889999');
-  const [password, setPassword] = useState('evFTbyVVCd');
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { updateProfile, viewProfile } from '../../services/UserAPI';
 
-  const handleUpdate = () => {
-    // handle update logic here
-    console.log('Profile Updated!');
-  };
+const ProfileScreen = () => {
+  const [profileData, setProfileData] = useState({
+    username: '',
+    email: '',
+    phoneNumber: '',
+    address: '',
+  });
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
+  const fetchProfile = async () => {
+    try {
+      const userId = await AsyncStorage.getItem('userId');
+      if (!userId) {
+        Alert.alert('Error', 'No user ID found');
+        return;
+      }
+
+      const response = await viewProfile(userId);
+      setProfileData(response.data);
+    } catch (error) {
+      console.error('Failed to fetch profile:', error.message);
+      Alert.alert('Error', 'Failed to fetch profile');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpdate = async () => {
+    try {
+      const userId = await AsyncStorage.getItem('userId');
+      const response = await updateProfile(userId, profileData);
+      Alert.alert('Success', 'Profile updated successfully');
+    } catch (error) {
+      console.error('Failed to update profile:', error.message);
+      Alert.alert('Error', 'Failed to update profile');
+    }
+  };
+
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
+
   return (
     <View style={styles.container}>
       {/* Header Section */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
           <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Edit Profile</Text>
@@ -29,7 +68,7 @@ const ProfileScreen = () => {
       {/* Avatar Section */}
       <View style={styles.avatarContainer}>
         <Image
-          source={{ uri: 'https://static.vecteezy.com/system/resources/thumbnails/025/337/669/small_2x/default-male-avatar-profile-icon-social-media-chatting-online-user-free-vector.jpg' }} // Placeholder image
+          source={{ uri: 'https://static.vecteezy.com/system/resources/thumbnails/025/337/669/small_2x/default-male-avatar-profile-icon-social-media-chatting-online-user-free-vector.jpg' }}
           style={styles.avatar}
         />
         <TouchableOpacity>
@@ -42,31 +81,30 @@ const ProfileScreen = () => {
         <Text style={styles.label}>Username</Text>
         <TextInput
           style={styles.input}
-          value={username}
-          onChangeText={setUsername}
+          value={profileData.username}
+          onChangeText={(value) => setProfileData({ ...profileData, username: value })}
         />
 
-        <Text style={styles.label}>Email I’d</Text>
+        <Text style={styles.label}>Email</Text>
         <TextInput
           style={styles.input}
-          value={email}
-          onChangeText={setEmail}
+          value={profileData.email}
+          onChangeText={(value) => setProfileData({ ...profileData, email: value })}
         />
 
         <Text style={styles.label}>Phone Number</Text>
         <TextInput
           style={styles.input}
-          value={phoneNumber}
+          value={profileData.phoneNumber}
           keyboardType="phone-pad"
-          onChangeText={setPhoneNumber}
+          onChangeText={(value) => setProfileData({ ...profileData, phoneNumber: value })}
         />
 
-        <Text style={styles.label}>Password</Text>
+        <Text style={styles.label}>Address</Text>
         <TextInput
           style={styles.input}
-          value={password}
-          secureTextEntry={true}
-          onChangeText={setPassword}
+          value={profileData.address}
+          onChangeText={(value) => setProfileData({ ...profileData, address: value })}
         />
 
         <TouchableOpacity style={styles.button} onPress={handleUpdate}>
