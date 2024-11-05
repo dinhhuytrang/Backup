@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import { getAllListProduct} from '../../services/ListProductAPI'; 
+import { getAllListProduct } from '../../services/ListProductAPI'; 
 
 const shop = {
   name: 'Football Club Merchandise Store',
@@ -33,9 +33,6 @@ const ProductList = () => {
     fetchProducts();
   }, []);
 
- 
-  
-
   const formatPrice = (price) => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' đ';
   };
@@ -43,16 +40,14 @@ const ProductList = () => {
   const renderProduct = ({ item }) => (
     <View style={styles.productContainer}>
       <Image source={{ uri: item.image_url }} style={styles.productImage} />
-
-      <TouchableOpacity onPress={() => navigation.navigate('ProductDetails', { productId: item.id })}>
+      <TouchableOpacity onPress={() => navigation.navigate('ProductDetails', { productId: item._id })}>
         <Text style={styles.productName}>{item.name}</Text>
       </TouchableOpacity>
-
       <View style={styles.priceContainer}>
         <Text style={styles.price}>{formatPrice(item.price)}</Text>
         <TouchableOpacity 
           style={styles.addButton} 
-          onPress={() => navigation.navigate('ProductDetails',{ productId: item.id })} // Call handleAddToCart when button is pressed
+          onPress={() => navigation.navigate('ProductDetails',{ productId: item._id })} 
         >
           <Text style={styles.addButtonText}>View Detail</Text>
         </TouchableOpacity>
@@ -61,12 +56,11 @@ const ProductList = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <Ionicons name="chevron-back-outline" size={30} />
         </TouchableOpacity>
-
         <Text style={styles.headerTitle}>Product List</Text>
         <Ionicons name="ellipsis-horizontal" size={30} />
       </View>
@@ -91,11 +85,12 @@ const ProductList = () => {
       <FlatList
         data={products}
         renderItem={renderProduct}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
         numColumns={2}
         contentContainerStyle={styles.productList}
+        showsVerticalScrollIndicator={false} // Optional: hides the vertical scroll indicator
       />
-    </View>
+    </ScrollView>
   );
 };
 

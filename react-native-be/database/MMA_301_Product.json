@@ -1,83 +1,298 @@
 [
-    {
-      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9b10" },
-      "name": "Real Madrid Home 2024/2025",
-      "description": "Official Home Authentic Shirt 24/25 White. A Los Blancos fan jersey inspired by tradition and made with recycled materials. When adidas designed Real Madrid's home kit, they looked to the long-held traditions of the club's famous city. Inspired by the chulapo outfits worn at Madrid's annual San Isidro Fiesta, the houndstooth-style patterning on this football jersey gives it a dash of style. Also featuring moisture-managing AEROREADY and an embroidered club badge, this top is made for the fans. This product is made with 100% recycled materials. By reusing materials that have already been created, we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
-      "price": "2.200.000",
-      "color": "white",
-      "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e470f0250dba451f92939cba348d488f_9366/Real_Madrid_24-25_Home_Authentic_Jersey_White_IX8095_HM30.jpg",
-      "gallery": [
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ec1e9fa46ec14c638641d8faa606900d_9366/Real_Madrid_24-25_Home_Authentic_Jersey_White_IX8095_HM4.jpg",
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/84528768d4d14cd58456c11b4d3d9ea5_9366/Real_Madrid_24-25_Home_Authentic_Jersey_White_IX8095_HM6.jpg",
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e755e0f306b94abeb4347fba28fbd3e9_9366/Real_Madrid_24-25_Home_Authentic_Jersey_White_IX8095_HM31.jpg"
-      ],
-      "club_id": { "$oid": "64b5f8f7bfbf1d6d444d9a01" },
-      "category_id": { "$oid": "64b5f8f7bfbf1d6d444d9b01" },
-      "remain": 50
+  {
+    "_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b10"
     },
-    {
-      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9b11" },
-      "name": "Manchester United 24/25 Home",
-      "description": "A Man Utd fan jersey that demands attention, made with recycled materials. Manchester United at Old Trafford. Home fans adore them and even rivals can't ignore them. In 24/25, the club's timeless home jerseys shout even louder with bright red inserts on the sides and a subtle gradient design on the front and back. Made for supporters, this adidas football shirt includes moisture-managing AEROREADY and an embroidered badge. This product is made with 100% recycled materials. By reusing materials that have already been created we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
-      "price": "2.200.000",
-      "color": "Bright Red",
-      "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ba2c1b171eaa4b0ea36e2a9aed2c5330_9366/Manchester_United_24-25_Home_Authentic_Jersey_Red_JF1291_HM30.jpg",
-      "gallery": [
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/a8b46b9b7c6841bc9047238e4da96781_9366/Manchester_United_24-25_Home_Authentic_Jersey_Red_JF1291_HM6.jpg",
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/a21df8f0357741b8a7d3cd8e3f8deb38_9366/Manchester_United_24-25_Home_Authentic_Jersey_Red_JF1291_HM31.jpg",
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/75a890bed083467ca209e4326272cba4_9366/Manchester_United_24-25_Home_Authentic_Jersey_Red_JF1291_HM9.jpg"
-      ],
-      "club_id": { "$oid": "64b5f8f7bfbf1d6d444d9a02" },
-      "category_id": { "$oid": "64b5f8f7bfbf1d6d444d9b01" },
-      "remain": 60
+    "name": "Real Madrid Home 2024/2025",
+    "description": "Official Home Authentic Shirt 24/25 White. A Los Blancos fan jersey inspired by tradition and made with recycled materials. When adidas designed Real Madrid's home kit, they looked to the long-held traditions of the club's famous city. Inspired by the chulapo outfits worn at Madrid's annual San Isidro Fiesta, the houndstooth-style patterning on this football jersey gives it a dash of style. Also featuring moisture-managing AEROREADY and an embroidered club badge, this top is made for the fans. This product is made with 100% recycled materials. By reusing materials that have already been created, we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
+    "price": "2.200.000",
+    "color": "white",
+    "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e470f0250dba451f92939cba348d488f_9366/Real_Madrid_24-25_Home_Authentic_Jersey_White_IX8095_HM30.jpg",
+    "gallery": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ec1e9fa46ec14c638641d8faa606900d_9366/Real_Madrid_24-25_Home_Authentic_Jersey_White_IX8095_HM4.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/84528768d4d14cd58456c11b4d3d9ea5_9366/Real_Madrid_24-25_Home_Authentic_Jersey_White_IX8095_HM6.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e755e0f306b94abeb4347fba28fbd3e9_9366/Real_Madrid_24-25_Home_Authentic_Jersey_White_IX8095_HM31.jpg"
+    ],
+    "club_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9a01"
     },
-    {
-      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9b12" },
-      "name": "Arsenal 24/25 Home Authentic",
-      "description": "An Arsenal fan jersey in their famous home colours, made with recycled materials. A clean look for a young squad who have their sights set on the very top. Standing out over those timeless home colours, a simple embroidered crest is the star of this Arsenal jersey from adidas. Moisture-managing AEROREADY and soft interlock fabric combine to keep football fans comfortable while they enjoy the ride. This product is made with 100% recycled materials. By reusing materials that have already been created, we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
-      "price": "2.200.000",
-      "color": "Better Scarlet / White",
-      "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/017bd9fc18c941bc8fbfac62db414c7e_9366/Arsenal_24-25_Home_Jersey_Red_IT6141_HM30.jpg",
-      "gallery": [
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/34959f0f8aa549f9b965afcee339e671_9366/Arsenal_24-25_Home_Jersey_Red_IT6141_HM31.jpg",
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/38d8d7c6114b4cf99308b93e71cea205_9366/Arsenal_24-25_Home_Jersey_Red_IT6141_HM7.jpg",
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/b3f85d746f414457b7072a88403b822c_9366/Arsenal_24-25_Home_Jersey_Red_IT6141_HM5.jpg"
-      ],
-      "club_id": { "$oid": "64b5f8f7bfbf1d6d444d9a03" },
-      "category_id": { "$oid": "64b5f8f7bfbf1d6d444d9b01" },
-      "remain": 20
+    "category_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b01"
     },
-    {
-      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9b13" },
-      "name": "FC Bayern 24/25 Home",
-      "description": "A triple-red FC Bayern home jersey for fans, made with recycled materials. A classic striped home shirt, with a twist. Created from three shades of red. The meandering stripes on this adidas FC Bayern jersey are formed from tiny diamonds for added club DNA. Built to keep football fans comfortable and proud. It also features moisture-managing AEROREADY and an embroidered club badge. This product is made with 100% recycled materials. By reusing materials that have already been created. We help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
-      "price": "2.200.00",
-      "color": "Red",
-      "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d80ce170b8ca4456a62bbc45f56eae09_9366/FC_Bayern_24-25_Home_Jersey_Red_IT8511_HM30.jpg",
-      "gallery": [
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/80771ce837be4cd3bc39e2dd4ef33c57_9366/FC_Bayern_24-25_Home_Jersey_Red_IT8511_HM31.jpg",
-        "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/f7ecbe6f09f24a5a8ad748a548b23d4f_9366/FC_Bayern_24-25_Home_Jersey_Red_IT8511_HM8.jpg",
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/86af8d3ccf5f45548e53484f88f6a98f_9366/FC_Bayern_24-25_Home_Jersey_Red_IT8511_HM4.jpg"
-      ],
-      "club_id": { "$oid": "64b5f8f7bfbf1d6d444d9a04" },
-      "category_id": { "$oid": "64b5f8f7bfbf1d6d444d9b01" },
-      "remain": 81
+    "remain": 50
+  },
+  {
+    "_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b11"
     },
-    {
-      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9b14" },
-      "name": "Juventus 24/25 Home Jersey",
-      "description": "A Juventus jersey with a mission to keep fans comfortable, made with recycled materials. The moon landings showed humankind that teamwork made anything possible. With a return to Earth's closest neighbour on the horizon, this adidas Juventus jersey looks forward with a lunar surface-inspired graphic embossed onto its soft fabric. High-tech AEROREADY and a premium embroidered badge work together to help football fans discover new levels of comfort and pride. This product is made with 100% recycled materials. By reusing materials that have already been created, we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
-      "price": "2.200.00",
-      "color": "White / Black",
-      "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/b38cbf7df9c04f92bb509a7357898535_9366/Juventus_24-25_Home_Jersey_White_IS8002_HM30.jpg",
-      "gallery": [
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d200b0381e8247e4b31cf4278c35a3ea_9366/Juventus_24-25_Home_Jersey_White_IS8002_HM4.jpg",
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/22a56f51134b4691bde9084cf3c4811e_9366/Juventus_24-25_Home_Jersey_White_IS8002_HM9.jpg",
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/59ad67c97d264bc084937ad2dec4b723_9366/Juventus_24-25_Home_Jersey_White_IS8002_HM3_hover.jpg"
-      ],
-      "club_id": { "$oid": "64b5f8f7bfbf1d6d444d9a05" },
-      "category_id": { "$oid": "64b5f8f7bfbf1d6d444d9b01" },
-      "remain": 30
-    }
-  ]
-  
+    "name": "Manchester United 24/25 Home",
+    "description": "A Man Utd fan jersey that demands attention, made with recycled materials. Manchester United at Old Trafford. Home fans adore them and even rivals can't ignore them. In 24/25, the club's timeless home jerseys shout even louder with bright red inserts on the sides and a subtle gradient design on the front and back. Made for supporters, this adidas football shirt includes moisture-managing AEROREADY and an embroidered badge. This product is made with 100% recycled materials. By reusing materials that have already been created we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
+    "price": "2.200.000",
+    "color": "Bright Red",
+    "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ba2c1b171eaa4b0ea36e2a9aed2c5330_9366/Manchester_United_24-25_Home_Authentic_Jersey_Red_JF1291_HM30.jpg",
+    "gallery": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/a8b46b9b7c6841bc9047238e4da96781_9366/Manchester_United_24-25_Home_Authentic_Jersey_Red_JF1291_HM6.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/a21df8f0357741b8a7d3cd8e3f8deb38_9366/Manchester_United_24-25_Home_Authentic_Jersey_Red_JF1291_HM31.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/75a890bed083467ca209e4326272cba4_9366/Manchester_United_24-25_Home_Authentic_Jersey_Red_JF1291_HM9.jpg"
+    ],
+    "club_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9a02"
+    },
+    "category_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b01"
+    },
+    "remain": 60
+  },
+  {
+    "_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b12"
+    },
+    "name": "Arsenal 24/25 Home Authentic",
+    "description": "An Arsenal fan jersey in their famous home colours, made with recycled materials. A clean look for a young squad who have their sights set on the very top. Standing out over those timeless home colours, a simple embroidered crest is the star of this Arsenal jersey from adidas. Moisture-managing AEROREADY and soft interlock fabric combine to keep football fans comfortable while they enjoy the ride. This product is made with 100% recycled materials. By reusing materials that have already been created, we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
+    "price": "2.200.000",
+    "color": "Better Scarlet / White",
+    "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/017bd9fc18c941bc8fbfac62db414c7e_9366/Arsenal_24-25_Home_Jersey_Red_IT6141_HM30.jpg",
+    "gallery": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/34959f0f8aa549f9b965afcee339e671_9366/Arsenal_24-25_Home_Jersey_Red_IT6141_HM31.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/38d8d7c6114b4cf99308b93e71cea205_9366/Arsenal_24-25_Home_Jersey_Red_IT6141_HM7.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/b3f85d746f414457b7072a88403b822c_9366/Arsenal_24-25_Home_Jersey_Red_IT6141_HM5.jpg"
+    ],
+    "club_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9a03"
+    },
+    "category_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b01"
+    },
+    "remain": 20
+  },
+  {
+    "_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b13"
+    },
+    "name": "FC Bayern 24/25 Home",
+    "description": "A triple-red FC Bayern home jersey for fans, made with recycled materials. A classic striped home shirt, with a twist. Created from three shades of red. The meandering stripes on this adidas FC Bayern jersey are formed from tiny diamonds for added club DNA. Built to keep football fans comfortable and proud. It also features moisture-managing AEROREADY and an embroidered club badge. This product is made with 100% recycled materials. By reusing materials that have already been created. We help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
+    "price": "2.200.00",
+    "color": "Red",
+    "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d80ce170b8ca4456a62bbc45f56eae09_9366/FC_Bayern_24-25_Home_Jersey_Red_IT8511_HM30.jpg",
+    "gallery": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/80771ce837be4cd3bc39e2dd4ef33c57_9366/FC_Bayern_24-25_Home_Jersey_Red_IT8511_HM31.jpg",
+      "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/f7ecbe6f09f24a5a8ad748a548b23d4f_9366/FC_Bayern_24-25_Home_Jersey_Red_IT8511_HM8.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/86af8d3ccf5f45548e53484f88f6a98f_9366/FC_Bayern_24-25_Home_Jersey_Red_IT8511_HM4.jpg"
+    ],
+    "club_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9a04"
+    },
+    "category_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b01"
+    },
+    "remain": 81
+  },
+  {
+    "_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b14"
+    },
+    "name": "Juventus 24/25 Home Jersey",
+    "description": "A Juventus jersey with a mission to keep fans comfortable, made with recycled materials. The moon landings showed humankind that teamwork made anything possible. With a return to Earth's closest neighbour on the horizon, this adidas Juventus jersey looks forward with a lunar surface-inspired graphic embossed onto its soft fabric. High-tech AEROREADY and a premium embroidered badge work together to help football fans discover new levels of comfort and pride. This product is made with 100% recycled materials. By reusing materials that have already been created, we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
+    "price": "2.200.00",
+    "color": "White / Black",
+    "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/b38cbf7df9c04f92bb509a7357898535_9366/Juventus_24-25_Home_Jersey_White_IS8002_HM30.jpg",
+    "gallery": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d200b0381e8247e4b31cf4278c35a3ea_9366/Juventus_24-25_Home_Jersey_White_IS8002_HM4.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/22a56f51134b4691bde9084cf3c4811e_9366/Juventus_24-25_Home_Jersey_White_IS8002_HM9.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/59ad67c97d264bc084937ad2dec4b723_9366/Juventus_24-25_Home_Jersey_White_IS8002_HM3_hover.jpg"
+    ],
+    "club_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9a05"
+    },
+    "category_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b01"
+    },
+    "remain": 30
+  },
+  {
+    "_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b15"
+    },
+    "name": "Real Madrid Away 24/25",
+    "description": "A radiant Real Madrid jersey for dynamic support, made with recycled materials. Highlighting the rise of a brand-new football generation. Created to complement Real Madrid's shimmering skills, this adidas away jersey stands out with a vibrant orange base and an abstract, star-inspired design. Its dark blue details include an embroidered club badge. Behind the scenes, moisture-managing AEROREADY will keep fans on top of their game. This product is made with 100% recycled materials. By reusing materials that have already been created, we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
+    "price": "2.200.000",
+    "color": "Crew Orange",
+    "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d1b8864012cc47b19b928932002cdc0f_9366/Real_Madrid_24-25_Away_Jersey_Orange_IU5013_HM30.jpg",
+    "gallery": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d1b8864012cc47b19b928932002cdc0f_9366/Real_Madrid_24-25_Away_Jersey_Orange_IU5013_HM30.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/de6d9bd565a24cf699775c0ced998017_9366/Real_Madrid_24-25_Away_Jersey_Orange_IU5013_HM4.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/43858d5cddb148e6b947b412b74856db_9366/Real_Madrid_24-25_Away_Jersey_Orange_IU5013_HM31.jpg"
+    ],
+    "club_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9a01"
+    },
+    "category_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b01"
+    },
+    "remain": 50
+  },
+  {
+    "_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b16"
+    },
+    "name": "Manchester United 24/25 Away",
+    "description": "A fashion-forward Man Utd jersey designed for comfort and made with recycled materials. With a bold design that nods to football culture, this adidas Manchester United jersey looks equally at home on and off the pitch. Silver details pop against an indigo base that also includes a subtle, repeating 'M' monogram. The light blue graphic on that stylish polo collar pays tribute to the river on which Old Trafford sits. Moisture-managing AEROREADY keeps fans comfortable on away days. This product is made with 100% recycled materials. By reusing materials that have already been created, we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
+    "price": "2.200.000",
+    "color": "Night Indigo",
+    "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/9f8cecd982ec4dfea83bd4dfb51b6158_9366/Manchester_United_24-25_Away_Jersey_Blue_IU1390_HM30.jpg",
+    "gallery": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/9f8cecd982ec4dfea83bd4dfb51b6158_9366/Manchester_United_24-25_Away_Jersey_Blue_IU1390_HM30.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/89da429573ec4891b0580a48f27777c0_9366/Manchester_United_24-25_Away_Jersey_Blue_IU1390_HM31.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/fcf4da3e13134e9aba9344b30c034146_9366/Manchester_United_24-25_Away_Jersey_Blue_IU1390_HM7.jpg"
+    ],
+    "club_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9a02"
+    },
+    "category_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b01"
+    },
+    "remain": 70
+  },
+  {
+    "_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b17"
+    },
+    "name": "Arsenal 24/25 Away Authentic",
+    "description": "A bold fan jersey designed with Labrum London and made with recycled materials. An expression of pride in Arsenal's diverse fanbase. Showing off Labrum London's signature West African influences, this adidas jersey is part of a collaboration with the British fashion brand. Intricate graphics and details in the colours of the Pan-African flag combine for an eye-catching look. A premium team badge and moisture-managing AEROREADY make it perfect for devoted football supporters. This product is made with 100% recycled materials. By reusing materials that have already been created, we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
+    "price": "2.200.000",
+    "color": "Black",
+    "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d3dbb824c86a4ac2812f6e8c341feda5_9366/Arsenal_24-25_Away_Jersey_Black_IT6148_HM30.jpg",
+    "gallery": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d3dbb824c86a4ac2812f6e8c341feda5_9366/Arsenal_24-25_Away_Jersey_Black_IT6148_HM30.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e2d9801fdd3e4265abef8aac8b0041b5_9366/Arsenal_24-25_Away_Jersey_Black_IT6148_HM31.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/588311e46186457b81db1df5428c285e_9366/Arsenal_24-25_Away_Jersey_Black_IT6148_HM1.jpg"
+    ],
+    "club_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9a03"
+    },
+    "category_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b01"
+    },
+    "remain": 30
+  },
+  {
+    "_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b18"
+    },
+    "name": "FC Bayern 24/25 Away",
+    "description": "A fan jersey inspired by a Bavarian icon and made with recycled materials. An iconic symbol and popular meeting place, the Statue of Bavaria has watched over Munich for centuries. adidas created this FC Bayern jersey to pay tribute to the famous landmark, hitting on a bold design that mimics the look of its weathered bronze. Created to keep football fans comfortable, this shirt also fields moisture-managing AEROREADY. This product is made with 100% recycled materials. By reusing materials that have already been created, we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
+    "price": "2.200.000",
+    "color": "Black",
+    "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/db1c0124ed9f45319eb59629cc9d65a0_9366/FC_Bayern_24-25_Away_Jersey_Black_IZ3130_HM30.jpg",
+    "gallery": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/db1c0124ed9f45319eb59629cc9d65a0_9366/FC_Bayern_24-25_Away_Jersey_Black_IZ3130_HM30.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/af9b34ac9c264c4486fda4e19e82ba56_9366/FC_Bayern_24-25_Away_Jersey_Black_IZ3130_HM31.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ce411a100647468fa1e2c88a620c7ea3_9366/FC_Bayern_24-25_Away_Jersey_Black_IZ3130_HM6.jpg"
+    ],
+    "club_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9a04"
+    },
+    "category_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b01"
+    },
+    "remain": 19
+  },
+  {
+    "_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b19"
+    },
+    "name": "Juventus 24/25 Away Jersey",
+    "description": "An away jersey for out-of-this-world fandom, made with recycled materials. Boldly exploring a brand-new look for the club, this Juventus away jersey shoots for the stars in bright colours. More familiar elements like that embroidered badge and those subtle stripes bring the look back down to Earth but, at its core, this adidas shirt is built for adventure. AEROREADY tech manages moisture to keep football fans feeling at home. This product is made with 100% recycled materials. By reusing materials that have already been created, we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
+    "price": "2.200.000",
+    "color": "Pure Sulfur",
+    "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/8059663c00ad473ca20bf07404c6575f_9366/Juventus_24-25_Away_Jersey_Yellow_JH1357_HM30.jpg",
+    "gallery": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/8059663c00ad473ca20bf07404c6575f_9366/Juventus_24-25_Away_Jersey_Yellow_JH1357_HM30.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e87adcdf86e14a2fae19b692ee8d013d_9366/Juventus_24-25_Away_Jersey_Yellow_JH1357_HM31.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/2e0b93e2da7242ab81445b69790f3a12_9366/Juventus_24-25_Away_Jersey_Yellow_JH1357_HM10.jpg"
+    ],
+    "club_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9a05"
+    },
+    "category_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b01"
+    },
+    "remain": 30
+  },
+  {
+    "_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b21"
+    },
+    "name": "F50 Boots",
+    "description": "Add zip to your play in lightweight boots made in part with recycled materials. Free the fast with the adidas F50. Created to unlock the full potential of your acceleration, movement and speed. Locking you in with a stretchy tongue, the Fiberskin upper on these lightweight adidas League football boots shows off a Sprintgrid print on the forefoot. The combination of an EVA midsole and grippy rubber outsole adds comfort and responsiveness on artificial turf courts. This product features at least 20% recycled materials. By reusing materials that have already been created, we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.",
+    "price": "2.400.000",
+    "color": "Turbo",
+    "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/2790fa16bac044bc876aeaf319e54c59_9366/F50_League_Turf_Boots_Pink_IF1335_22_model.jpg",
+    "gallery": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/1574cf5cee2146839159cee1addae2c4_9366/F50_League_Turf_Boots_Pink_IF1335_01_00_standard_hover.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/de031470a2d04b22bd2ab9e77d5655e4_9366/F50_League_Turf_Boots_Pink_IF1335_02_standard.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/56d14c9803a1455e91be07a71289b69d_9366/F50_League_Turf_Boots_Pink_IF1335_03_standard.jpg"
+    ],
+    "category_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b04"
+    },
+    "remain": 10
+  },
+  {
+    "_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b22"
+    },
+    "name": "Predator Elite",
+    "description": "Boots for precision shooting, made in part with a blend of recycled and renewable materials. When the goal's in your sights, adidas Predator converts pressure into pinpoint accuracy. Strategically placed onto the flexible HybridTouch 2.0 upper of these Elite football boots, rubber Strikeskin fins bite into the ball for precision shooting. An adidas PRIMEKNIT collar offers lockdown and the Controlframe 2.0 outsole delivers domination on firm ground. By choosing recycled, we are able to reuse materials that have already been created, which helps to reduce waste. Renewable materials choices will help us to remove our reliance on finite resources. Our products made with a blend of recycled and renewable materials feature at least 20% total of these materials.",
+    "price": "5.400.000",
+    "color": "Platinum",
+    "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d4b152adcb934dcba53214d1930e9a24_9366/Predator_Elite_Firm_Ground_Boots_Grey_IF8868_22_model.jpg",
+    "gallery": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/8a311215c9524797aaef3187d5b82b3e_9366/Predator_Elite_Firm_Ground_Boots_Grey_IF8868_01_00_standard.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/c0cb39f537be4afd8142c6572ad671cd_9366/Predator_Elite_Firm_Ground_Boots_Grey_IF8868_02_standard.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/9c7ec33437ca45f98234eb5db285dd4e_9366/Predator_Elite_Firm_Ground_Boots_Grey_IF8868_03_standard.jpg"
+    ],
+    "category_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b04"
+    },
+    "remain": 9
+  },
+  {
+    "_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b23"
+    },
+    "name": "Copa Pure",
+    "description": "Boots for precision shooting, made in part with a blend of recycled and renewable materials. When the goal's in your sights, adidas Predator converts pressure into pinpoint accuracy. Strategically placed onto the flexible HybridTouch 2.0 upper of these Elite football boots, rubber Strikeskin fins bite into the ball for precision shooting. An adidas PRIMEKNIT collar offers lockdown and the Controlframe 2.0 outsole delivers domination on firm ground. By choosing recycled, we are able to reuse materials that have already been created, which helps to reduce waste. Renewable materials choices will help us to remove our reliance on finite resources. Our products made with a blend of recycled and renewable materials feature at least 20% total of these materials.",
+    "price": "5.500.000",
+    "color": "Cloud White",
+    "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/8877930c12c64afd95e5106425792de1_9366/Copa_Pure_2_Elite_Firm_Ground_Boots_White_IG6402_22_model.jpg",
+    "gallery": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/afb7247f1961411ca50c6728a4f044b0_9366/Copa_Pure_2_Elite_Firm_Ground_Boots_White_IG6402_01_standard_hover.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/163989fd03794265b6da386e86818673_9366/Copa_Pure_2_Elite_Firm_Ground_Boots_White_IG6402_02_standard.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/3f0e10250eae4105aa0281926c63ee1b_9366/Copa_Pure_2_Elite_Firm_Ground_Boots_White_IG6402_03_standard.jpg"
+    ],
+    "category_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b04"
+    },
+    "remain": 20
+  },
+  {
+    "_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b24"
+    },
+    "name": "Messi F50",
+    "description": "Messi-style juniors' F50 boots for turf courts. F50 speed, Messi style. In 2024, Lionel Messi's range of adidas football boots are crafted to match his preferences even more closely. The flexible HybridTouch upper on these juniors' F50 League boots includes a synthetic tongue for lightweight comfort. Underneath, a lug rubber outsole adds responsiveness on artificial turf.",
+    "price": "3.700.000",
+    "color": "Gold Metallic",
+    "image_url": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/a2217314a4874291b0cbe53de7763333_9366/Messi_F50_League_Turf_Boots_Kids_Gold_IG9277_22_model.jpg",
+    "gallery": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d81bfd3f3f804c9ea4ffb336f74e3ed3_9366/Messi_F50_League_Turf_Boots_Kids_Gold_IG9277_01_00_standard_hover_hover.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/02555ca51e9046b3a9e46f47aaf237f6_9366/Messi_F50_League_Turf_Boots_Kids_Gold_IG9277_02_standard_hover.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/9d18ab4adf2243c2bb30ccf29039e631_9366/Messi_F50_League_Turf_Boots_Kids_Gold_IG9277_03_standard.jpg"
+    ],
+    "category_id": {
+      "$oid": "64b5f8f7bfbf1d6d444d9b04"
+    },
+    "remain": 40
+  }
+]

@@ -3,7 +3,9 @@ import axios from "./customizeAPI";
 const getAllListProduct = () => {
     return axios.get("/products");
 };
-
+const getProduct = () => {
+  return axios.get("/products/top");
+};
 // Club
 const getAllClub = () => {
   return axios.get("/clubs"); 
@@ -11,12 +13,12 @@ const getAllClub = () => {
 
 // get products details
 const getProductByID = (productId) => {
-    return axios.get(`products?id=${productId}`);
+    return axios.get(`products/${productId}`);
 };
 
 // get to card 
 const getToCart = (productToAdd) => {
-  return axios.post("/cart", productToAdd); 
+  return axios.post("/cart/add", productToAdd); 
 }
 // get all cart
 
@@ -25,4 +27,4 @@ const getAllCart = () => {
 };
 
 // update cart
-export { getAllListProduct, getAllClub, getProductByID, getToCart,getAllCart};
+export { getAllListProduct, getAllClub, getProductByID, getToCart,getAllCart,getProduct};

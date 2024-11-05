@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from "react";
-import {  View,  Text,  Image,  TouchableOpacity,  ScrollView,  StyleSheet,  ActivityIndicator,  Modal,} from "react-native";
+import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet, ActivityIndicator, Modal } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { getProductByID, getToCart } from "../../services/ListProductAPI"; // Chỉnh sửa ở đây
+import { getProductByID, getToCart } from "../../services/ListProductAPI"; 
 
 export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState("");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isModalVisible, setIsModalVisible] = useState(false); // Trạng thái hiển thị modal
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigation = useNavigation();
   const route = useRoute();
   const { productId } = route.params;
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
   useEffect(() => {
     const fetchProductDetails = async () => {
+      // console.log("Fetching product details for ID:", productId);
       try {
         const response = await getProductByID(productId);
-        console.log("API response:", response);
+        // console.log("API response:", response);
 
-        if (response.data && Array.isArray(response.data) && response.data.length > 0) {
-          setProduct(response.data[0]);
+        if (response.data) {
+          setProduct(response.data); // Assuming response.data is the product object
         } else {
           setError(new Error("Product not found or empty response"));
         }
@@ -40,15 +42,15 @@ export default function ProductDetails() {
   }, [productId]);
 
   const handleNextImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === product.gallery.length - 1 ? 0 : prevIndex + 1
-    );
+    if (product && product.gallery) {
+      setCurrentImageIndex((prevIndex) => (prevIndex === product.gallery.length - 1 ? 0 : prevIndex + 1));
+    }
   };
 
   const handlePrevImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? product.gallery.length - 1 : prevIndex - 1
-    );
+    if (product && product.gallery) {
+      setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? product.gallery.length - 1 : prevIndex - 1));
+    }
   };
 
   const handleAddToCart = async () => {
@@ -58,7 +60,7 @@ export default function ProductDetails() {
     }
 
     const productToAdd = {
-      id: product.id,
+      id: product._id, // Adjust according to your product structure
       name: product.name,
       price: product.price,
       size: selectedSize,
@@ -68,7 +70,7 @@ export default function ProductDetails() {
     };
 
     try {
-      await getToCart(productToAdd); // Gọi hàm addToCart
+      await getToCart(productToAdd);
       alert("Product added to cart successfully!");
     } catch (error) {
       console.error("Error adding to cart:", error);
@@ -87,7 +89,7 @@ export default function ProductDetails() {
   if (!product) {
     return <Text>Product not found</Text>;
   }
-
+  const MAX_DESCRIPTION_LENGTH = 100;
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -114,7 +116,7 @@ export default function ProductDetails() {
       </View>
 
       <View style={styles.productInfo}>
-        <Text style={styles.category}>{product.category_id}</Text>
+        {/* <Text style={styles.category}>{product.category_id}</Text> */}
         <Text style={styles.productTitle}>{product.name}</Text>
         <View style={styles.ratingRow}>
           <Icon name="star" size={20} color="#FFD700" />
@@ -122,15 +124,25 @@ export default function ProductDetails() {
         </View>
 
         <Text style={styles.sectionTitle}>Product Details</Text>
-        <Text style={styles.productDescription}>{product.description}</Text>
+        <Text style={styles.productDescription}>
+          {isDescriptionExpanded
+            ? product.description
+            : `${product.description.substring(0, MAX_DESCRIPTION_LENGTH)}...`}
+        </Text>
+
+        <TouchableOpacity onPress={() => setIsDescriptionExpanded(!isDescriptionExpanded)}>
+          <Text style={styles.readMoreText}>
+            {isDescriptionExpanded ? "Read Less" : "Read More"}
+          </Text>
+        </TouchableOpacity>
 
         <Text style={styles.sectionTitle}>Color: {product.color}</Text>
 
         <Text style={styles.sectionTitle}>Select Size</Text>
         <View style={styles.sizeRow}>
-          {["S", "M", "L", "XL", "XXL", "XXXL"].map((size, index) => (
+          {["S", "M", "L", "XL", "XXL", "XXXL"].map((size) => (
             <TouchableOpacity
-              key={index}
+              key={size} // Use size as key for uniqueness
               style={[
                 styles.sizeButton,
                 selectedSize === size && styles.selectedSizeButton,
@@ -149,8 +161,7 @@ export default function ProductDetails() {
           ))}
         </View>
 
-        {/* Modal size */}
-        <Text style={styles.sizeGuide} onPress={() => setIsModalVisible(true)} >
+        <Text style={styles.sizeGuide} onPress={() => setIsModalVisible(true)}>
           Size guide
         </Text>
 
@@ -165,7 +176,6 @@ export default function ProductDetails() {
         </View>
       </View>
 
-      {/* Modal cho Size Guide */}
       <Modal
         transparent={true}
         visible={isModalVisible}
@@ -176,10 +186,8 @@ export default function ProductDetails() {
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Size Guide</Text>
 
-            {/* Horizontal Scroll View */}
             <ScrollView horizontal={true} style={styles.scrollView}>
               <View style={styles.table}>
-                {/* Table Header */}
                 <View style={[styles.tableRow, { backgroundColor: "#dedfe4" }]}>
                   <Text style={[styles.tableHeader, styles.borderCell, styles.smallColumn]}>S</Text>
                   <Text style={[styles.tableHeader, styles.borderCell, styles.smallColumn]}>M</Text>
@@ -188,7 +196,6 @@ export default function ProductDetails() {
                   <Text style={[styles.tableHeader, styles.borderCell, styles.smallColumn]}>2XL</Text>
                 </View>
 
-                {/* Table Body */}
                 <View style={styles.tableRow}>
                   <Text style={[styles.tableCell, styles.borderCell, styles.smallColumn]}>87 - 92 cm</Text>
                   <Text style={[styles.tableCell, styles.borderCell, styles.smallColumn]}>93 - 100 cm</Text>
@@ -199,7 +206,6 @@ export default function ProductDetails() {
               </View>
             </ScrollView>
 
-            {/* Close Button */}
             <TouchableOpacity
               style={styles.closeButton}
               onPress={() => setIsModalVisible(false)}
@@ -267,6 +273,11 @@ const styles = StyleSheet.create({
   productDescription: {
     fontSize: 16,
     marginVertical: 5,
+  },
+  readMoreText: {
+    color: "blue", 
+    marginTop: 5,
+    textDecorationLine: 'underline',
   },
   sizeRow: {
     flexDirection: "row",

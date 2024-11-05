@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, Image, FlatList, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { getAllListProduct, getAllClub } from '../../services/ListProductAPI';
+import { getProduct, getAllClub } from '../../services/ListProductAPI';
 const chunkArray = (array, chunkSize) => {
   const result = [];
   for (let i = 0; i < array.length; i += chunkSize) {
@@ -14,8 +15,20 @@ const HomeScreen = ({ navigation }) => {
   const scrollRef = useRef(null);
   const [club, setClub] = useState([]); // Clubs state
   const [featuredItems, setFeaturedItems] = useState([]);
-
+  const [username, setUsername] = useState('');
   useEffect(() => {
+
+    const fetchUsername = async () => {
+      try {
+        const storedUsername = await AsyncStorage.getItem('username');
+        console.log('Retrieved username:', storedUsername);
+        if (storedUsername) {
+          setUsername(storedUsername);
+        }
+      } catch (error) {
+        console.error('Error retrieving username:', error);
+      }
+    };
     const fetchClubs = async () => {
       try {
         const response = await getAllClub(); 
@@ -27,7 +40,7 @@ const HomeScreen = ({ navigation }) => {
 
     const fetchProducts = async () => {
       try {
-        const response = await getAllListProduct(); 
+        const response = await getProduct(); 
         setFeaturedItems(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -36,6 +49,7 @@ const HomeScreen = ({ navigation }) => {
 
     fetchClubs();
     fetchProducts();
+    fetchUsername();
   }, []);
   
 
@@ -50,7 +64,7 @@ const HomeScreen = ({ navigation }) => {
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.welcomeText}>Hello Trang,</Text>
+      <Text style={styles.welcomeText}>Hello {username}</Text>
         <Text style={styles.welcomeSubText}>Welcome</Text>
         <TouchableOpacity onPress={()=> navigation.navigate("Cart")} style={styles.cartIcon}>
           <Icon name="shopping-cart" size={24} color="#333" />
@@ -64,7 +78,7 @@ const HomeScreen = ({ navigation }) => {
 
       {/* Clubs Section */}
       <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>FIND YOUR TEAM</Text>
+        <Text style={styles.sectionTitle}>SPONSORED TEAM</Text>
         <TouchableOpacity onPress={() => navigation.navigate('ListProduct')}>
           <Text style={styles.viewAll}>View All</Text>
         </TouchableOpacity>

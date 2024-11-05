@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView, Alert } from 'react-native';
+import { signUp } from '../../services/Authentication'; // Adjust the import based on your directory structure
 
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -8,10 +9,30 @@ const SignUpScreen = ({ navigation }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
+  const handleSignUp = async () => {
+    if (!email || !username || !password || !confirmPassword) {
+      Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      Alert.alert('Error', 'Passwords do not match');
+      return;
+    }
+
+    try {
+      const response = await signUp(username, password, email, confirmPassword);
+      Alert.alert('Success', 'Registration successful!');
+      // Optionally, navigate to SignIn screen or log in automatically
+      navigation.navigate('SignIn');
+    } catch (error) {
+      Alert.alert('Error', error.response?.data?.message || 'An error occurred during registration');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        {/* Top section with black background, white text, and logo */}
         <View style={styles.topSection}>
           <Image
             source={{ uri: 'https://www.tennis-point.co.uk/on/demandware.static/-/Library-Sites-TennisPoint/en_GB/dwef851813/webflow/16227/images/Performance_Logo_BWr.png' }}
@@ -21,7 +42,6 @@ const SignUpScreen = ({ navigation }) => {
           <Text style={styles.subTitle}>Please sign up to your existing account</Text>
         </View>
 
-        {/* Bottom section with white background and rounded top corners */}
         <View style={styles.bottomSection}>
           <Text style={styles.label}>NAME</Text>
           <TextInput
@@ -77,7 +97,7 @@ const SignUpScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.loginButton}>
+          <TouchableOpacity style={styles.loginButton} onPress={handleSignUp}>
             <Text style={styles.loginButtonText}>SIGN UP</Text>
           </TouchableOpacity>
 

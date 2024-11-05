@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'reac
 
 const VerificationScreen = ({ navigation }) => {
   const [code, setCode] = useState(['', '', '', '']);
-  const [timer, setTimer] = useState(50);
+  const [timer, setTimer] = useState(120);
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -56,7 +56,7 @@ const VerificationScreen = ({ navigation }) => {
             />
           ))}
         </View>
-        <TouchableOpacity disabled={timer > 0} onPress={() => setTimer(50)}>
+        <TouchableOpacity disabled={timer > 0} onPress={() => setTimer(120)}>
           <Text style={styles.resendText}>Resend {timer > 0 ? `in ${timer} sec` : ''}</Text>
         </TouchableOpacity>
 

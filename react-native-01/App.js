@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import { Text } from 'react-native';
 import HomeScreen from './screens/bottom_tab/HomeScreens';
 import FavoritesScreen from './screens/bottom_tab/FavoritesScreen';
 import CartScreen from './screens/bottom_tab/CartScreen';
@@ -14,10 +14,10 @@ import ProductList from './screens/product_screens/ListProducts';
 import AddAddressScreen from './screens/profile_screens/AddAddressScreen';
 import AddCardScreen from './screens/profile_screens/AddCardScreen';
 import EditProfile from './screens/profile_screens/EditProfiile';
-import SignInScreen from './screens/auth/signIn'; // Your sign-in screen
-import SignUpScreen from './screens/auth/signUp'; // Your sign-up screen
+import SignInScreen from './screens/auth/signIn'; 
+import SignUpScreen from './screens/auth/signUp'; 
 import ResetPasswordScreen from './screens/auth/resetPw';
-import VerificationScreen from './screens/auth/verification'; // Your verification screen
+import VerificationScreen from './screens/auth/verification'; 
 import ShippingScreen from './screens/checkoout_screen/ShipingDetail';
 import PaymentScreen from './screens/checkoout_screen/PaymentMethod';
 import ReviewScreen from './screens/checkoout_screen/Review';
@@ -31,9 +31,8 @@ const HomeStack = createStackNavigator();
 const ListProductStack = createStackNavigator();
 const CartStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
-const AuthStack = createStackNavigator(); // Stack for Authentication
+const AuthStack = createStackNavigator(); 
 
-// Home Stack
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
@@ -42,7 +41,7 @@ function HomeStackScreen() {
   );
 }
 
-// List Product Stack
+
 function ListProductStackScreen() {
   return (
     <ListProductStack.Navigator screenOptions={{ headerShown: false }}>
@@ -52,7 +51,6 @@ function ListProductStackScreen() {
   );
 }
 
-// Cart Stack
 function CartStackScreen() {
   return (
     <CartStack.Navigator screenOptions={{ headerShown: false }}>
@@ -65,7 +63,7 @@ function CartStackScreen() {
   );
 }
 
-// Profile Stack
+
 function ProfileStackScreen() {
   return (
     <ProfileStack.Navigator screenOptions={{ headerShown: false }}>
@@ -80,7 +78,7 @@ function ProfileStackScreen() {
   );
 }
 
-// Main App (Bottom Tab Navigation)
+
 function MainApp() {
   return (
     <Tab.Navigator
@@ -112,7 +110,7 @@ function MainApp() {
   );
 }
 
-// Authentication Stack (for SignIn, SignUp, etc.)
+
 function AuthStackScreen() {
   return (
     <AuthStack.Navigator screenOptions={{ headerShown: false }}>
@@ -120,46 +118,37 @@ function AuthStackScreen() {
       <AuthStack.Screen name="SignUp" component={SignUpScreen} />
       <AuthStack.Screen name="ResetPassword" component={ResetPasswordScreen} />
       <AuthStack.Screen name="Verification" component={VerificationScreen} />
+      <AuthStack.Screen name="Home" component={HomeStackScreen} />
     </AuthStack.Navigator>
   );
 }
 
 export default function App() {
-  // login oke
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // Giả lập đã đăng nhập thành công
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
- 
   useEffect(() => {
     const checkLoginStatus = async () => {
-      const loggedIn = await AsyncStorage.getItem('isLoggedIn');
-      setIsLoggedIn(loggedIn === 'true' || loggedIn === null); // Giả lập đã đăng nhập
+      try {
+        const loggedIn = await AsyncStorage.getItem('isLoggedIn');
+        setIsLoggedIn(loggedIn === 'true');
+        
+        // Clear the login data temporarily
+        await AsyncStorage.removeItem('isLoggedIn');
+      } catch (error) {
+        console.log('Error checking login status:', error);
+      } finally {
+        setLoading(false); 
+      }
     };
 
     checkLoginStatus();
   }, []);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // useEffect(() => {
-  //   const checkLoginStatus = async () => {
-  //     const loggedIn = await AsyncStorage.getItem('isLoggedIn');
-  //     setIsLoggedIn(loggedIn === 'true');
-  //   };
+  if (loading) {
+    return <Text>Loading...</Text>; 
+  }
 
-  //   checkLoginStatus();
-  // }, []);
-
-  // ko login 
-  // const [isLoggedIn, setIsLoggedIn] = useState(false); // Giả lập chưa đăng nhập
-
-  // // Check login status (on app start)
-  // useEffect(() => {
-  //   const checkLoginStatus = async () => {
-  //     const loggedIn = await AsyncStorage.getItem('isLoggedIn');
-  //     setIsLoggedIn(loggedIn === 'true');
-  //   };
-
-  //   checkLoginStatus();
-  // }, []);
   return (
     <NavigationContainer>
       {isLoggedIn ? <MainApp /> : <AuthStackScreen />}

@@ -14,29 +14,22 @@ const LoginScreen = () => {
     try {
       console.log('Logging in with:', { username, password });
   
-      const response = await signIn(username, password);
-      const { data } = response;
+      const response = await signIn(username, password); // Call the API
+      const { token, user } = response.data;
   
-      // Find the user with the matching username and password from the response
-      if (data.username === username && data.password === password) {
-        console.log('Login successful:', data);
-  
-        // Use the role provided in the database
-        const userRole = data.role; // Extract the role from the response
-        const mockToken = 'mockToken12345'; // Create a mock token
+      if (token) {
+        console.log('Login successful:', user);
   
         // Store user login info in AsyncStorage
         await AsyncStorage.setItem('isLoggedIn', 'true');
-        await AsyncStorage.setItem('userToken', mockToken); // Save the mock token
+        await AsyncStorage.setItem('userToken', token); // Save the JWT token
+        await AsyncStorage.setItem('username', username);
+        console.log('Username saved:', username);
   
-        // Navigate based on role
-        if (userRole === 'USER') {
-          navigation.navigate('Home');
-        } else if (userRole === 'ADMIN') {
-          navigation.navigate('Admin');
-        }
+        // Navigate based on role (assuming role-based navigation, or adapt as needed)
+        navigation.navigate('Home'); // Adjust to target destination
       } else {
-        // If username or password don't match, show an error
+        // If no token is returned, show an error
         throw new Error('Invalid username or password');
       }
     } catch (error) {
@@ -44,6 +37,7 @@ const LoginScreen = () => {
       Alert.alert('Login Failed', 'Please check your username and password.');
     }
   };
+  
   
   return (
     <View style={styles.container}>

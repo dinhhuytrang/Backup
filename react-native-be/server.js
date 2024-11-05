@@ -5,6 +5,9 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const productRouter = require('./routers/product.router');
+const clubRouter = require('./routers/club.router');
+const cartRouter = require('./routers/cart.router');
+const authRouter = require('./routers/auth.router');
 
 // Load environment variables
 dotenv.config();
@@ -19,7 +22,10 @@ app.use(cors());
 
 
 // app routes
-app.use('/products',productRouter)
+app.use('/products',productRouter),
+app.use('/clubs',clubRouter)
+app.use('/cart',cartRouter)
+app.use('/auth',authRouter)
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
