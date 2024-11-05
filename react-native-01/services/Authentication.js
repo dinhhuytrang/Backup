@@ -28,3 +28,35 @@ export const signIn = async (username, password) => {
         throw error; 
     }
 };
+
+// fogot pw
+  export const forgotPassword = async (email) => {
+    try {
+        const response = await axios.post('/auth/forgotpw', {
+            email,
+        });
+        return response; 
+    } catch (error) {
+        console.error('Forgot Password API Error:', error.response? error.response.data : error.message);
+        throw error;
+    }
+};
+// verify code 
+ // changpw
+
+ export const changePassword = async (resetCode, newPassword, confirmPassword) => {
+  try {
+    const response = await axios.post('/auth/changepw', {
+      resetCode,
+      newPassword,
+      confirmPassword,
+    });
+    return response; 
+  } catch (error) {
+    console.error('Change Password API Error:', error.response ? error.response.data : error.message);
+    throw error;
+  }
+};
+
+
+ 

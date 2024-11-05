@@ -1,33 +1,46 @@
-import React, { useState } from "react";
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";  
 import Ionicons from "react-native-vector-icons/Ionicons";  
 import { useNavigation } from "@react-navigation/native";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { viewAddress, deleteAddress } from '../../services/UserAPI'; 
 
 const MyAddress = () => {
   const navigation = useNavigation();
+  const [addresses, setAddresses] = useState([]);
+  const [user, setUser] = useState(null);
 
-  // Initialize state for addresses
-  const [addresses, setAddresses] = useState([
-    {
-      id: '1',
-      address: 'Gia Phong, Gia Viễn, Ninh Bình',
-    },
-    {
-      id: '2',
-      address: 'Thạch Hòa, Thạch Thất, Hà Nội',
-    },
-  ]);
+  useEffect(() => {
+    const fetchUserAndAddresses = async () => {
+      const user = JSON.parse(await AsyncStorage.getItem("user"));
+      setUser(user);
+      if (!user) {
+        navigation.navigate('SignIn');
+        return;
+      }
+  
+      try {
+        const response = await viewAddress(user.id);
+        // Handle case where response data has an `addresses` property.
+        const addressData = response.data.addresses
+          ? Array.isArray(response.data.addresses)
+            ? response.data.addresses
+            : [{ id: "1", address: response.data.addresses }] // If single address, wrap in an array
+          : [];
+        setAddresses(addressData);
+      } catch (error) {
+        console.error("Failed to fetch addresses:", error);
+      }
+    };
+  
+    fetchUserAndAddresses();
+  }, []);
+  
 
-  // Function to delete an address by ID
-  const deleteAddress = (id) => {
-    setAddresses((prevAddresses) => 
-      prevAddresses.filter((address) => address.id !== id)
-    );
-  };
+  
 
-  // Component for rendering a single address item
   const AddressItem = ({ item }) => (
     <View style={styles.addressContainer}>
       <View style={styles.leftContainer}>
@@ -36,23 +49,12 @@ const MyAddress = () => {
           <Text style={styles.addressText}>{item.address}</Text>
         </View>
       </View>
-      <View style={styles.rightContainer}>
-        <TouchableOpacity onPress={()=>navigation.navigate("EditAddress")} style={styles.editButton}>
-          <FontAwesome name="edit" size={20} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.deleteButton} 
-          onPress={() => deleteAddress(item.id)} 
-        >
-          <MaterialIcon name="delete" size={20} color="black" />
-        </TouchableOpacity>
-      </View>
+      
     </View>
   );
 
   return (
     <View style={styles.container}>
-      {/* Back button */}
       <View style={styles.profilebutton}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="chevron-back-outline" size={30} />
@@ -68,9 +70,9 @@ const MyAddress = () => {
 
       <TouchableOpacity
         style={styles.addButton}
-        onPress={() => navigation.navigate("AddAddressScreen")}
+        onPress={() => navigation.navigate("Profile")}
       >
-        <Text style={styles.addButtonText}>ADD NEW ADDRESS</Text>
+        <Text style={styles.addButtonText}>Back</Text>
       </TouchableOpacity>
     </View>
   );

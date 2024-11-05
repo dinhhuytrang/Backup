@@ -25,6 +25,7 @@ import SuccessScreen from './screens/checkoout_screen/OderSucces';
 import OrderHistoryScreen from './screens/profile_screens/OrderHistory';
 import MyAddress from './screens/profile_screens/Address_List';
 import EditAddress from './screens/profile_screens/Edit Address';
+import ChangePasswordScreen from './screens/auth/changepw';
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
@@ -74,6 +75,7 @@ function ProfileStackScreen() {
       <ProfileStack.Screen name="AddCardScreen" component={AddCardScreen} />
       <ProfileStack.Screen name="EditProfile" component={EditProfile} />
       <ProfileStack.Screen name="History" component={OrderHistoryScreen} />
+      <ProfileStack.Screen name="SignIn" component={SignInScreen} />
     </ProfileStack.Navigator>
   );
 }
@@ -118,6 +120,7 @@ function AuthStackScreen() {
       <AuthStack.Screen name="SignUp" component={SignUpScreen} />
       <AuthStack.Screen name="ResetPassword" component={ResetPasswordScreen} />
       <AuthStack.Screen name="Verification" component={VerificationScreen} />
+      <AuthStack.Screen name="Changepw" component={VerificationScreen}/>
       <AuthStack.Screen name="Home" component={HomeStackScreen} />
     </AuthStack.Navigator>
   );
