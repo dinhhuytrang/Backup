@@ -1,17 +1,24 @@
 [
-  {
-      "userId": "64b5f8f7bfbf1d6d444d9c11",
-      "products": [
-          {
-              "productId": "64b5f8f7bfbf1d6d444d9b10",
-              "quantity": 2,
-              "size": "M"
-          },
-          {
-              "productId": "64b5f8f7bfbf1d6d444d9b14",
-              "quantity": 1,
-              "size": "L"
-          }
-      ]
-  }
+    {
+        "_id": { "$oid": "672a0c89810e29d28a5e2f95" },
+        "userId": "64b5f8f7bfbf1d6d444d9c11",
+        "product": "64b5f8f7bfbf1d6d444d9b10",
+        "quantity": 2,
+        "size": "M"
+    },
+    {
+        "_id": { "$oid": "672a0cf8810e29d28a5e2f9b" },
+        "userId": "64b5f8f7bfbf1d6d444d9c11",
+        "product": "64b5f8f7bfbf1d6d444d9b13",
+        "quantity": 2,
+        "size": "M"
+    },
+    {
+        "_id": { "$oid": "672a0d09810e29d28a5e2f9e" },
+        "userId": "64b5f8f7bfbf1d6d444d9c11",
+        "product": "64b5f8f7bfbf1d6d444d9b16",
+        "quantity": 2,
+        "size": "M"
+    }
+
 ]

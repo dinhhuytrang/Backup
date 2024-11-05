@@ -12,7 +12,7 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     try {
-      console.log('Logging in with:', { username, password });
+      // console.log('Logging in with:', { username, password });
   
       const response = await signIn(username, password); // Call the API
       const { token, user } = response.data;
@@ -23,8 +23,8 @@ const LoginScreen = () => {
         // Store user login info in AsyncStorage
         await AsyncStorage.setItem('isLoggedIn', 'true');
         await AsyncStorage.setItem('userToken', token); // Save the JWT token
-        await AsyncStorage.setItem('username', username);
-        console.log('Username saved:', username);
+        await AsyncStorage.setItem('user',  JSON.stringify(user));
+
   
         // Navigate based on role (assuming role-based navigation, or adapt as needed)
         navigation.navigate('Home'); // Adjust to target destination
