@@ -14,21 +14,29 @@ const ProfileScreen = () => {
   });
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
-
+  const [user, setUser] = useState()
   useEffect(() => {
     fetchProfile();
   }, []);
 
   const fetchProfile = async () => {
     try {
-      const userId = await AsyncStorage.getItem('userId');
-      if (!userId) {
-        Alert.alert('Error', 'No user ID found');
+      const user = JSON.parse(await AsyncStorage.getItem("user"))
+      setUser(user)
+      if (!user) {
+        navigation.navigate('SignIn');
         return;
       }
 
-      const response = await viewProfile(userId);
-      setProfileData(response.data);
+      const response = await viewProfile(user.id);
+      if (response && response.data) {
+        setProfileData({
+          username: response.data.username || '',
+          email: response.data.email || '',
+          phoneNumber: response.data.phoneNumber || '',
+          address: response.data.address || '',
+        });
+      }
     } catch (error) {
       console.error('Failed to fetch profile:', error.message);
       Alert.alert('Error', 'Failed to fetch profile');
@@ -39,14 +47,23 @@ const ProfileScreen = () => {
 
   const handleUpdate = async () => {
     try {
-      const userId = await AsyncStorage.getItem('userId');
-      const response = await updateProfile(userId, profileData);
+      const user = JSON.parse(await AsyncStorage.getItem("user"));
+      setUser(user);
+      
+      if (!user) {
+        navigation.navigate('SignIn');
+        return;
+      }
+  
+      await updateProfile(user.id, profileData);
       Alert.alert('Success', 'Profile updated successfully');
+      navigation.navigate('Profile')
     } catch (error) {
       console.error('Failed to update profile:', error.message);
       Alert.alert('Error', 'Failed to update profile');
     }
   };
+  
 
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
@@ -56,7 +73,7 @@ const ProfileScreen = () => {
     <View style={styles.container}>
       {/* Header Section */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Edit Profile</Text>
@@ -141,7 +158,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   avatar: {
-    marginTop:40,
+    marginTop: 40,
     width: 120,
     height: 120,
     borderRadius: 60,

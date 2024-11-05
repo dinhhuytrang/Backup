@@ -75,6 +75,7 @@ function ProfileStackScreen() {
       <ProfileStack.Screen name="AddCardScreen" component={AddCardScreen} />
       <ProfileStack.Screen name="EditProfile" component={EditProfile} />
       <ProfileStack.Screen name="History" component={OrderHistoryScreen} />
+      <ProfileStack.Screen name="SignIn" component={SignInScreen} />
     </ProfileStack.Navigator>
   );
 }

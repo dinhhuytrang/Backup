@@ -7,6 +7,11 @@ const ProductSchema = new Schema({
   price: { type: String, required: true },
   color: { type: String, required: true },
   image_url: { type: String, required: true },
+  size: [
+    {
+      type: String
+    }
+  ],
   gallery: [{ type: String }],
   club_id: { type: Schema.Types.ObjectId, ref: 'Club', required: true },
   category_id: { type: Schema.Types.ObjectId, ref: 'category', required: true },

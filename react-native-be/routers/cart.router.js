@@ -20,33 +20,22 @@ cartRouter.get('/:userId', async (req, res, next) => {
 });
 
 // Add to cart
-cartRouter.post('/:userId/add', async (req, res, next) => {
+cartRouter.post('/add', async (req, res, next) => {
     try {
-        const userId = req.params.userId;
-        const { productId, quantity = 1, size } = req.body;
+        const newCart=req.body
+        const user=newCart.user
+        const product=newCart.product
+        const size=newCart.size
+        const quantity=newCart.quantity
 
         if (!size) {
             return res.status(400).json({ message: 'Size is required' });
         }
 
-        let cart = await Cart.findOne({ userId });
-
-        if (!cart) {
-            cart = new Cart({ userId, products: [] });
-        }
-
-        const existingProduct = cart.products.find(item => item.productId.toString() === productId && item.size === size);
-
-        if (existingProduct) {
-            existingProduct.quantity += quantity;
-        } else {
-            cart.products.push({ productId, quantity, size });
-        }
-
-        await cart.save();
-        res.status(200).json(cart);
+        await Cart.create({ user, product, quantity, size })
+        res.status(201).json("add successful");
     } catch (error) {
-       next(error);
+        next(error);
     }
 });
 

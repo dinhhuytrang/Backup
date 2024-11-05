@@ -12,7 +12,7 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     try {
-      console.log('Logging in with:', { username, password });
+      // console.log('Logging in with:', { username, password });
   
       const response = await signIn(username, password); 
       const { token, user } = response.data;
@@ -22,9 +22,10 @@ const LoginScreen = () => {
   
         // Store user login info in AsyncStorage
         await AsyncStorage.setItem('isLoggedIn', 'true');
-        await AsyncStorage.setItem('userToken', token); 
-        await AsyncStorage.setItem('user',JSON.stringify(user));
         console.log('Username saved:', username);
+        await AsyncStorage.setItem('userToken', token); 
+        await AsyncStorage.setItem('user',  JSON.stringify(user));
+
   
         
         navigation.navigate('Home'); 

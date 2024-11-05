@@ -1,24 +1,24 @@
 import axios from "./customizeAPI";
 
 const getAllListProduct = () => {
-    return axios.get("/products");
+  return axios.get("/products");
 };
 const getProduct = () => {
   return axios.get("/products/top");
 };
 // Club
 const getAllClub = () => {
-  return axios.get("/clubs"); 
+  return axios.get("/clubs");
 };
 
 // get products details
 const getProductByID = (productId) => {
-    return axios.get(`products/${productId}`);
+  return axios.get(`products/${productId}`);
 };
 
 // get to card 
-const getToCart = (productToAdd) => {
-  return axios.post("/cart/add", productToAdd); 
+const addNewCart = (newCart) => {
+  return axios.post(`/cart/add`, newCart);
 }
 // get all cart
 
@@ -27,4 +27,4 @@ const getAllCart = () => {
 };
 
 // update cart
-export { getAllListProduct, getAllClub, getProductByID, getToCart,getAllCart,getProduct};
+export { getAllListProduct, getAllClub, getProductByID, addNewCart, getAllCart, getProduct };
