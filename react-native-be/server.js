@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const productRouter = require('./routers/product.router');
 
 // Load environment variables
 dotenv.config();
@@ -16,6 +17,9 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cors());
 
+
+// app routes
+app.use('/products',productRouter)
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
