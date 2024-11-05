@@ -1,15 +1,14 @@
 {
-    "user_id": { "$oid": "64b5f8f7bfbf1d6d444d9u11" },
-    "cart": [
-      {
-        "_id": { "$oid": "64b5f8f7bfbf1d6d444d9b10" },
-        "name": "Real Madrid Home 2024/2025",
-        "price": "2.200.000",
-        "size": "S",
-        "quantity": 1,
-        "color": "white",
-        "image": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ec1e9fa46ec14c638641d8faa606900d_9366/Real_Madrid_24-25_Home_Authentic_Jersey_White_IX8095_HM4.jpg"
-      }
-    ]
-  }
-  
+  "user_id": { "$oid": "64b5f8f7bfbf1d6d444d9c11" },
+  "cart": [
+    {
+      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9b10" },
+      "name": "Real Madrid Home 2024/2025",
+      "price": "2.200.000",
+      "size": "S",
+      "quantity": 1,
+      "color": "white",
+      "image": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ec1e9fa46ec14c638641d8faa606900d_9366/Real_Madrid_24-25_Home_Authentic_Jersey_White_IX8095_HM4.jpg"
+    }
+  ]
+}

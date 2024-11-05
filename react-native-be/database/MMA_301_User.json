@@ -1,21 +1,20 @@
 [
-    {
-      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9u11" },
-      "username": "user1",
-      "password": "12345",
-      "email": "john@gmail.com",
-      "phoneNumber": "01234546789",
-      "address": "123 Main St",
-      "role": "USER"
-    },
-    {
-      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9u12" },
-      "username": "admin",
-      "password": "12345",
-      "email": "jane@example.com",
-      "phoneNumber": "09876543210",
-      "address": "456 Elm St",
-      "role": "ADMIN"
-    }
-  ]
-  
+  {
+    "_id": { "$oid": "64b5f8f7bfbf1d6d444d9c11" },
+    "username": "user1",
+    "password": "12345",
+    "email": "john@gmail.com",
+    "phoneNumber": "01234546789",
+    "address": "123 Main St",
+    "role": "USER"
+  },
+  {
+    "_id": { "$oid": "64b5f8f7bfbf1d6d444d9c12" },
+    "username": "admin",
+    "password": "12345",
+    "email": "jane@example.com",
+    "phoneNumber": "09876543210",
+    "address": "456 Elm St",
+    "role": "ADMIN"
+  }
+]
