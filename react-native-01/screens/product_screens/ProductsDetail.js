@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet, ActivityIndicator, Modal } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { getProductByID, getToCart } from "../../services/ListProductAPI"; 
+import { getProductByID, addNewCart } from "../../services/ListProductAPI";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState("");
@@ -15,11 +17,15 @@ export default function ProductDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
-
+  const [user, setUser] = useState()
   useEffect(() => {
+
+
     const fetchProductDetails = async () => {
       // console.log("Fetching product details for ID:", productId);
       try {
+        const user = JSON.parse(await AsyncStorage.getItem("user"))
+        setUser(user)
         const response = await getProductByID(productId);
         // console.log("API response:", response);
 
@@ -59,21 +65,20 @@ export default function ProductDetails() {
       return;
     }
 
-    const productToAdd = {
-      id: product._id, // Adjust according to your product structure
-      name: product.name,
-      price: product.price,
+    const newCart = {
+      user: user?.id,
+      product: product._id, 
       size: selectedSize,
-      color: product.color,
-      image: product.image_url,
       quantity: 1,
     };
-
+    
     try {
-      await getToCart(productToAdd);
-      alert("Product added to cart successfully!");
+      const response =await addNewCart(newCart)
+      if (response.status === 201) {
+        alert(response.data);
+      }
     } catch (error) {
-      console.error("Error adding to cart:", error);
+      console.error("Error adding to cart:", error.response || error.message);
       alert("Failed to add product to cart.");
     }
   };
@@ -275,7 +280,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   readMoreText: {
-    color: "blue", 
+    color: "blue",
     marginTop: 5,
     textDecorationLine: 'underline',
   },
@@ -307,8 +312,8 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   totalPrice: {
-    marginLeft:-10,
-    marginRight:5,
+    marginLeft: -10,
+    marginRight: 5,
     fontSize: 20,
     fontWeight: "bold",
   },
@@ -384,13 +389,13 @@ const styles = StyleSheet.create({
     color: "black",
     textDecorationLine: "underline",
     marginVertical: 10,
-    backgroundColor:"black",
+    backgroundColor: "black",
     color: "white",
     padding: 5,
     borderRadius: 5,
-    width:100,
+    width: 100,
     borderWidth: 1,
-    textAlign:"center",
+    textAlign: "center",
     fontSize: 16,
   },
 });
