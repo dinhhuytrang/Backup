@@ -1,0 +1,13 @@
+[
+    {
+      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9z10" }, 
+      "user_id": { "$oid": "64b5f8f7bfbf1d6d444d9u11" }, 
+      "product_id": { "$oid": "64b5f8f7bfbf1d6d444d9b13" } 
+    },
+    {
+      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9z11" }, 
+      "user_id": { "$oid": "64b5f8f7bfbf1d6d444d9u11" }, 
+      "product_id": { "$oid": "64b5f8f7bfbf1d6d444d9b14" } 
+    }
+  ]
+  

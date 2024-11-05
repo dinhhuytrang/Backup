@@ -1,0 +1,33 @@
+[
+    {
+      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9a01" },
+      "name": "Real Madrid",
+      "logo_url": "https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/if_w_gt_150,w_150/realmadrid_d_25938de7d8.png",
+      "sponsor": "Adidas"
+    },
+    {
+      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9a02" },
+      "name": "Manchester United",
+      "logo_url": "https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/if_w_gt_150,w_150/manchester_d_44765e0ca4.png",
+      "sponsor": "Adidas"
+    },
+    {
+      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9a03" },
+      "name": "Arsenal",
+      "logo_url": "https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/if_w_gt_150,w_150/arsenal_d_34cda16867.png",
+      "sponsor": "Adidas"
+    },
+    {
+      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9a04" },
+      "name": "Bayern Munich",
+      "logo_url": "https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/if_w_gt_150,w_150/bayer_d_3b14548aff.png",
+      "sponsor": "Adidas"
+    },
+    {
+      "_id": { "$oid": "64b5f8f7bfbf1d6d444d9a05" },
+      "name": "Juventus",
+      "logo_url": "https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/if_w_gt_150,w_150/juventus_d_29d6017607.png",
+      "sponsor": "Adidas"
+    }
+  ]
+  
