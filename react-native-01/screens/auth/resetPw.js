@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import {  View,  Text,  TextInput,  TouchableOpacity,  StyleSheet,  Image,  ScrollView,} from "react-native";
-
+import { forgotPassword } from '../../services/Authentication';
 const ResetPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
-
+  const handlePasswordReset = async () => {
+    try {
+      const response = await forgotPassword(email);
+      console.log("Đã gửi liên kết đặt lại mật khẩu:", response.data);
+      navigation.navigate("Verification");
+    } catch (error) {
+      console.error("Lỗi khi gửi liên kết đặt lại mật khẩu:", error);
+    }
+  };
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        {/* Top section with black background, white text, and logo */}
         <View style={styles.topSection}>
           <Image
             source={{
@@ -33,15 +40,15 @@ const ResetPasswordScreen = ({ navigation }) => {
             onChangeText={setEmail}
           />
 
-          <TouchableOpacity style={styles.loginButton}>
+          <TouchableOpacity
+            style={styles.loginButton}
+            onPress={handlePasswordReset}
+          >
             <Text style={styles.loginButtonText}>SEND</Text>
           </TouchableOpacity>
 
           <View style={styles.signUpContainer}>
             <Text>Already have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Verification")}>
-              <Text style={styles.signUpText}> Verification</Text>
-            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

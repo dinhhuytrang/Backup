@@ -7,7 +7,9 @@ const UserSchema = new Schema({
   email: { type: String, required: true },
   phoneNumber: { type: String },
   address: { type: String },
+
   role: { type: String, enum: ['USER', 'ADMIN'], default: "USER" }
+
 });
 
 module.exports = mongoose.model('user', UserSchema);

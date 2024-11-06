@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/Users.model");
+const nodemailer = require("nodemailer");
 const authRouter = express.Router();
 
 // Environment variables
@@ -28,6 +29,7 @@ authRouter.post("/register", async (req, res, next) => {
     // Create a new user
     const newUser = new User({
       email,      // Include email if you want to store it
+
       username,
       password: hashedPassword,
     });
@@ -61,7 +63,9 @@ authRouter.post("/login", async (req, res, next) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ message: "Incorrect username or password" });
+      return res
+        .status(401)
+        .json({ message: "Incorrect username or password" });
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
@@ -69,6 +73,7 @@ authRouter.post("/login", async (req, res, next) => {
     });
 
     res.json({ token, user: { id: user._id, username: user.username, phoneNumber: user.phoneNumber, address: user.address } });
+
   } catch (error) {
     next(error);
   }
@@ -77,49 +82,75 @@ authRouter.post("/login", async (req, res, next) => {
 // Forgot Password
 authRouter.post("/forgotpw", async (req, res, next) => {
   try {
-    const { username } = req.body; // Changed to username
+    const { email } = req.body;
 
-    // Find user by username
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Generate a verification code (in a real app, you'd send an email)
-    const verificationCode = Math.floor(
-      100000 + Math.random() * 900000
-    ).toString(); // Generate a 6-digit code
-    user.verificationCode = verificationCode; // Save it temporarily for the demo
-
+    const resetCode = Math.random().toString(36).slice(-8);
+    user.resetCode = resetCode;
+    user.resetCodeExpiry = Date.now() + 3600000;
     await user.save();
 
-    // Ideally, you would send the verification code via email
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: user.email,
+      subject: "Password Reset Request",
+      text: `Your password reset code is: ${resetCode}. Please use it to reset your password.`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
     res.json({
-      message: "Verification code sent to your registered email",
-      verificationCode,
+      message: "A password reset code has been sent to your registered email",
     });
   } catch (error) {
     next(error);
   }
 });
 
-// Verification of the code (you can extend this functionality)
-authRouter.post("/verify", async (req, res, next) => {
+// Change Password
+authRouter.post("/changepw", async (req, res, next) => {
   try {
-    const { username, code } = req.body; // Changed to username
+    const { resetCode, newPassword, confirmPassword } = req.body;
 
-    // Find user by username
-    const user = await User.findOne({ username });
-    if (!user || user.verificationCode !== code) {
-      return res.status(401).json({ message: "Invalid verification code" });
+    // Log the reset code and check the database for matching user
+    console.log("Reset Code:", resetCode); // Debugging line
+    const user = await User.findOne({
+      resetCode: resetCode, // Make sure this matches the correct field name
+      resetCodeExpiry: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: "Invalid or expired reset code" });
     }
 
-    res.json({
-      message: "Verification successful, you can now reset your password",
-    });
+    if (newPassword !== confirmPassword) {
+      return res.status(400).json({ message: "New passwords do not match" });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    user.resetCode = undefined; 
+    user.resetCodeExpiry = undefined; 
+    await user.save();
+
+    res.json({ message: "Password changed successfully" });
   } catch (error) {
+    console.error("Error changing password:", error); // Debugging line
     next(error);
   }
 });
+
 
 module.exports = authRouter;
