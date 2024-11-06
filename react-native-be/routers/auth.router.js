@@ -28,7 +28,8 @@ authRouter.post("/register", async (req, res, next) => {
 
     // Create a new user
     const newUser = new User({
-      email, // Include email if you want to store it
+      email,      // Include email if you want to store it
+
       username,
       password: hashedPassword,
     });
@@ -71,8 +72,7 @@ authRouter.post("/login", async (req, res, next) => {
       expiresIn: "1h",
     });
 
-
-    res.json({ token, user: { id: user._id, username: user.username} });
+    res.json({ token, user: { id: user._id, username: user.username, phoneNumber: user.phoneNumber, address: user.address } });
 
   } catch (error) {
     next(error);

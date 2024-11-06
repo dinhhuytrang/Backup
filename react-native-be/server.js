@@ -8,6 +8,7 @@ const productRouter = require('./routers/product.router');
 const clubRouter = require('./routers/club.router');
 const cartRouter = require('./routers/cart.router');
 const authRouter = require('./routers/auth.router');
+const orderRouter = require('./routers/order.route');
 const userRouter = require('./routers/userRouter');
 
 // Load environment variables
@@ -26,6 +27,8 @@ app.use(cors());
 app.use('/products',productRouter),
 app.use('/clubs',clubRouter)
 app.use('/cart',cartRouter)
+app.use('/order',orderRouter)
+
 app.use('/auth',authRouter),
 app.use('/user',userRouter)
 // Connect to MongoDB
