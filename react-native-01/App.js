@@ -138,9 +138,6 @@ export default function App() {
       try {
         const loggedIn = await AsyncStorage.getItem('isLoggedIn');
         setIsLoggedIn(loggedIn === 'true');
-
-        // Clear the login data temporarily
-        await AsyncStorage.removeItem('isLoggedIn');
       } catch (error) {
         console.log('Error checking login status:', error);
       } finally {
@@ -157,7 +154,13 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      {isLoggedIn ? <MainApp /> : <AuthStackScreen />}
+      {isLoggedIn ? (
+        <MainApp />
+      ) : (
+        <AuthStackScreen setIsLoggedIn={setIsLoggedIn} /> 
+      )}
     </NavigationContainer>
   );
 }
+
+

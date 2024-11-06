@@ -12,17 +12,18 @@ const ProfileScreen = () => {
   const [user, setUser] = useState()
   const fetchProfile = async () => {
     try {
-      const user = JSON.parse(await AsyncStorage.getItem("user"))
-      setUser(user)
+      // Attempt to retrieve user data from AsyncStorage
+      const user = JSON.parse(await AsyncStorage.getItem("user"));
+      setUser(user);
+      
       if (!user) {
+        // If no user is found in storage, navigate to SignIn screen
         navigation.navigate('SignIn');
         return;
       }
-
-      // Use viewProfile function from UserAPI
-      const response = await viewProfile(user.id);
-      // console.log(response);
       
+      // Fetch profile data if the user is logged in
+      const response = await viewProfile(user.id);
       setProfileData(response.data);
     } catch (error) {
       console.error('Failed to fetch profile:', error.message);
@@ -49,8 +50,8 @@ const ProfileScreen = () => {
   }
   const handleSignOut = async () => {
     try {
-      await AsyncStorage.clear(); // Xóa tất cả dữ liệu trong AsyncStorage
-      navigation.navigate('SignIn'); // Điều hướng người dùng về màn hình SignIn
+      await AsyncStorage.clear(); // Clear all data
+      navigation.navigate('SignIn'); // Redirect to SignIn screen
     } catch (error) {
       Alert.alert('Error', 'Failed to sign out');
     }
@@ -112,16 +113,7 @@ const ProfileScreen = () => {
   );
 };
 
-// Sign-out handler placeholder
-const handleSignOut = async () => {
-  try {
-    await AsyncStorage.removeItem('userId');
-    await AsyncStorage.removeItem('userToken');
-    navigation.navigate('SignIn'); // Adjust based on your navigation setup
-  } catch (error) {
-    Alert.alert('Error', 'Failed to sign out');
-  }
-};
+
 
 const styles = StyleSheet.create({
   container: {

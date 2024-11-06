@@ -20,13 +20,12 @@ const HomeScreen = ({ navigation }) => {
 
     const fetchUsername = async () => {
       try {
-        const storedUsername = await AsyncStorage.getItem('username');
-        console.log('Retrieved username:', storedUsername);
-        if (storedUsername) {
-          setUsername(storedUsername);
+        const user = JSON.parse(await AsyncStorage.getItem('user')); 
+        if (user && user.username) {
+          setUsername(user.username); 
         }
       } catch (error) {
-        console.error('Error retrieving username:', error);
+        console.error('Error retrieving user:', error);
       }
     };
     const fetchClubs = async () => {
