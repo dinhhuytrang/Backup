@@ -8,47 +8,47 @@ const authRouter = express.Router();
 require("dotenv").config();
 // Registration
 authRouter.post("/register", async (req, res, next) => {
-    try {
-      const { email, username, password, confirmpassword } = req.body;
-  
-      // Check if the username is already taken
-      const existingUser = await User.findOne({ username });
-      if (existingUser) {
-        return res.status(400).json({ message: "Username is already taken" });
-      }
-  
-      // Check if passwords match
-      if (password !== confirmpassword) {
-        return res.status(400).json({ message: "Passwords do not match" });
-      }
-  
-      // Hash the password
-      const hashedPassword = await bcrypt.hash(password, 10);
-  
-      // Create a new user
-      const newUser = new User({
-        email,      // Include email if you want to store it
-        username,
-        password: hashedPassword,
-      });
-  
-      // Save the user to the database
-      await newUser.save();
-  
-      // Optionally, generate a token (if you want to auto-login after registration)
-      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-      });
-  
-      // Send response
-      res
-        .status(201)
-        .json({ token, user: { id: newUser._id, username: newUser.username } });
-    } catch (error) {
-      next(error);
+  try {
+    const { email, username, password, confirmpassword } = req.body;
+
+    // Check if the username is already taken
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ message: "Username is already taken" });
     }
-  });
-  
+
+    // Check if passwords match
+    if (password !== confirmpassword) {
+      return res.status(400).json({ message: "Passwords do not match" });
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user
+    const newUser = new User({
+      email,      // Include email if you want to store it
+      username,
+      password: hashedPassword,
+    });
+
+    // Save the user to the database
+    await newUser.save();
+
+    // Optionally, generate a token (if you want to auto-login after registration)
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    // Send response
+    res
+      .status(201)
+      .json({ token, user: { id: newUser._id, username: newUser.username } });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Login
 authRouter.post("/login", async (req, res, next) => {
   try {
@@ -68,7 +68,7 @@ authRouter.post("/login", async (req, res, next) => {
       expiresIn: "1h",
     });
 
-    res.json({ token, user: { id: user._id, username: user.username} });
+    res.json({ token, user: { id: user._id, username: user.username, phoneNumber: user.phoneNumber, address: user.address } });
   } catch (error) {
     next(error);
   }

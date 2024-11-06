@@ -14,10 +14,10 @@ import ProductList from './screens/product_screens/ListProducts';
 import AddAddressScreen from './screens/profile_screens/AddAddressScreen';
 import AddCardScreen from './screens/profile_screens/AddCardScreen';
 import EditProfile from './screens/profile_screens/EditProfiile';
-import SignInScreen from './screens/auth/signIn'; 
-import SignUpScreen from './screens/auth/signUp'; 
+import SignInScreen from './screens/auth/signIn';
+import SignUpScreen from './screens/auth/signUp';
 import ResetPasswordScreen from './screens/auth/resetPw';
-import VerificationScreen from './screens/auth/verification'; 
+import VerificationScreen from './screens/auth/verification';
 import ShippingScreen from './screens/checkoout_screen/ShipingDetail';
 import PaymentScreen from './screens/checkoout_screen/PaymentMethod';
 import ReviewScreen from './screens/checkoout_screen/Review';
@@ -25,13 +25,14 @@ import SuccessScreen from './screens/checkoout_screen/OderSucces';
 import OrderHistoryScreen from './screens/profile_screens/OrderHistory';
 import MyAddress from './screens/profile_screens/Address_List';
 import EditAddress from './screens/profile_screens/Edit Address';
+import { OrderProvider } from './OrderContext';
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const ListProductStack = createStackNavigator();
 const CartStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
-const AuthStack = createStackNavigator(); 
+const AuthStack = createStackNavigator();
 
 function HomeStackScreen() {
   return (
@@ -53,13 +54,15 @@ function ListProductStackScreen() {
 
 function CartStackScreen() {
   return (
-    <CartStack.Navigator screenOptions={{ headerShown: false }}>
-      <CartStack.Screen name="Cart" component={CartScreen} />
-      <CartStack.Screen name="Shipping" component={ShippingScreen} />
-      <CartStack.Screen name="Payment" component={PaymentScreen} />
-      <CartStack.Screen name="Review" component={ReviewScreen} />
-      <CartStack.Screen name="Success" component={SuccessScreen} />
-    </CartStack.Navigator>
+    <OrderProvider>
+      <CartStack.Navigator screenOptions={{ headerShown: false }}>
+        <CartStack.Screen name="Cart" component={CartScreen} />
+        <CartStack.Screen name="Shipping" component={ShippingScreen} />
+        <CartStack.Screen name="Payment" component={PaymentScreen} />
+        <CartStack.Screen name="Review" component={ReviewScreen} />
+        <CartStack.Screen name="Success" component={SuccessScreen} />
+      </CartStack.Navigator>
+    </OrderProvider>
   );
 }
 
@@ -132,13 +135,13 @@ export default function App() {
       try {
         const loggedIn = await AsyncStorage.getItem('isLoggedIn');
         setIsLoggedIn(loggedIn === 'true');
-        
+
         // Clear the login data temporarily
         await AsyncStorage.removeItem('isLoggedIn');
       } catch (error) {
         console.log('Error checking login status:', error);
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
@@ -146,7 +149,7 @@ export default function App() {
   }, []);
 
   if (loading) {
-    return <Text>Loading...</Text>; 
+    return <Text>Loading...</Text>;
   }
 
   return (

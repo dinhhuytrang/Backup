@@ -4,47 +4,49 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { getAllCart } from '../../services/ListProductAPI';
 import { useFocusEffect } from '@react-navigation/native';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const CartScreen = () => {
   const navigation = useNavigation();
   const [cart, setCart] = useState([]);
   const [couponCode, setCouponCode] = useState('');
-  const shippingCost = 8000; 
+  const shippingCost = 20000;
+  const [user, setUser] = useState()
 
+  const fetchCart = async () => {
+    try {
+      const userLocal = JSON.parse(await AsyncStorage.getItem("user"))
+      setUser(userLocal)
+      const cartApi = await axios.get(`http://192.168.0.102:9999/cart/${userLocal?.id}`)
+      setCart(cartApi.data);
+    } catch (error) {
+      console.error('Error fetching cart:', error.response || error.message);
+    } 
+  };
   useFocusEffect(
     React.useCallback(() => {
-      const fetchCart = async () => {
-        try {
-          const response = await getAllCart();  // Fetch cart data again when screen is focused
-          setCart(response.data);
-        } catch (error) {
-          console.error('Error fetching cart:', error);
-        }
-      };
-  
+
       fetchCart();
-  
+
     }, [])
   );
 
-  const handleQuantityChange = (id, type) => {
-    const updatedCart = cart.map(item => {
-      if (item.id === id) {
-        if (type === 'increase') {
-          item.quantity += 1;
-        } else if (type === 'decrease' && item.quantity > 1) {
-          item.quantity -= 1;
-        }
-      }
-      return item;
-    });
-    setCart(updatedCart);
+  const handleQuantityChange = async (idCart, type) => {
+    try {
+      
+      await axios.post(`http://192.168.0.102:9999/cart/changeQuantity?id=${idCart}&type=${type}`)
+      fetchCart()
+    } catch (error) {
+      console.error("Error change quantity cart:", error.response || error.message);
+      alert("Failed to change quantity cart.");
+    }
   };
 
   const handleRemoveAll = () => setCart([]);
 
   const subtotal = cart.reduce((sum, item) => {
-    const priceWithoutDots = item.price.replace(/\./g, ''); 
-    const numericPrice = parseFloat(priceWithoutDots); 
+    const priceWithoutDots = item.product.price
+    const numericPrice = parseFloat(priceWithoutDots);
     return sum + numericPrice * item.quantity;
   }, 0);
   const total = subtotal + shippingCost;
@@ -58,20 +60,20 @@ const CartScreen = () => {
       <>
         {cart.map((item) => (
           <View key={item.id} style={styles.cartItem}>
-            <Image source={{ uri: item.image }} style={styles.productImage} />
+            <Image source={{ uri: item.product.image_url }} style={styles.productImage} />
             <View style={styles.itemDetails}>
-              <Text style={styles.itemName}>{item.name}</Text>
-              <Text style={styles.itemInfo}>Size - {item.size} | Color - {item.color}</Text>
+              <Text style={styles.itemName}>{item.product.name}</Text>
+              <Text style={styles.itemInfo}>Size - {item.size} | Color - {item.product.color}</Text>
               <Text style={styles.itemPrice}>
-                {formatCurrency(parseFloat(item.price.replace(/\./g, '')) * item.quantity)}
+                {formatCurrency(item.product.price * item.quantity)}
               </Text>
             </View>
             <View style={styles.quantityControls}>
-              <TouchableOpacity onPress={() => handleQuantityChange(item.id, 'decrease')}>
+              <TouchableOpacity onPress={() => handleQuantityChange(item._id, 'decrease')}>
                 <Text style={styles.controlButton}>-</Text>
               </TouchableOpacity>
               <Text style={styles.quantityText}>{item.quantity}</Text>
-              <TouchableOpacity onPress={() => handleQuantityChange(item.id, 'increase')}>
+              <TouchableOpacity onPress={() => handleQuantityChange(item._id, 'increase')}>
                 <Text style={styles.controlButton}>+</Text>
               </TouchableOpacity>
             </View>
@@ -111,45 +113,45 @@ const CartScreen = () => {
 
       {/* Summary Section */}
       {cart.length > 0 && (
-  <>
-    <View style={styles.summary}>
-      <Text style={styles.summaryText}>Subtotal</Text>
-      <Text style={styles.summaryText}>{formatCurrency(subtotal)}</Text>
-    </View>
+        <>
+          <View style={styles.summary}>
+            <Text style={styles.summaryText}>Subtotal</Text>
+            <Text style={styles.summaryText}>{formatCurrency(subtotal)}</Text>
+          </View>
 
-    <View style={styles.summary}>
-      <Text style={styles.summaryText}>Shipping Cost</Text>
-      <Text style={styles.summaryText}>{formatCurrency(shippingCost)}</Text>
-    </View>
+          <View style={styles.summary}>
+            <Text style={styles.summaryText}>Shipping Cost</Text>
+            <Text style={styles.summaryText}>{formatCurrency(shippingCost)}</Text>
+          </View>
 
-    <View style={styles.summary}>
-      <Text style={styles.summaryText}>Tax</Text>
-      <Text style={styles.summaryText}>{formatCurrency(0)}</Text>
-    </View>
+          <View style={styles.summary}>
+            <Text style={styles.summaryText}>Tax</Text>
+            <Text style={styles.summaryText}>{formatCurrency(0)}</Text>
+          </View>
 
-    <View style={styles.summary}>
-      <Text style={styles.summaryTotalText}>Total</Text>
-      <Text style={styles.summaryTotalText}>{formatCurrency(total)}</Text>
-    </View>
+          <View style={styles.summary}>
+            <Text style={styles.summaryTotalText}>Total</Text>
+            <Text style={styles.summaryTotalText}>{formatCurrency(total)}</Text>
+          </View>
 
-    {/* Coupon input and Checkout button */}
-    <View style={styles.couponContainer}>
-      <TextInput
-        style={styles.couponInput}
-        placeholder="Enter Coupon Code"
-        value={couponCode}
-        onChangeText={setCouponCode}
-      />
-      <TouchableOpacity style={styles.applyCouponButton}>
-        <Text style={styles.applyCouponText}>→</Text>
-      </TouchableOpacity>
-    </View>
+          {/* Coupon input and Checkout button */}
+          <View style={styles.couponContainer}>
+            <TextInput
+              style={styles.couponInput}
+              placeholder="Enter Coupon Code"
+              value={couponCode}
+              onChangeText={setCouponCode}
+            />
+            <TouchableOpacity style={styles.applyCouponButton}>
+              <Text style={styles.applyCouponText}>→</Text>
+            </TouchableOpacity>
+          </View>
 
-    <TouchableOpacity onPress={()=>navigation.navigate("Shipping")} style={styles.checkoutButton}>
-      <Text style={styles.checkoutText}>Checkout</Text>
-    </TouchableOpacity>
-  </>
-)}
+          <TouchableOpacity onPress={() => navigation.navigate("Shipping")} style={styles.checkoutButton}>
+            <Text style={styles.checkoutText}>Checkout</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </ScrollView>
   );
 };
@@ -254,7 +256,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
   },
-  
+
   applyCouponButton: {
     paddingHorizontal: 10,
   },

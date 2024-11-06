@@ -1,46 +1,83 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
-import HeaderProgress from './HeaderProgress';  
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import HeaderProgress from './HeaderProgress';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useOrder } from '../../OrderContext';
+import axios from 'axios';
+
 const PaymentScreen = ({ navigation }) => {
-  const [paymentMethod, setPaymentMethod] = useState('Credit Card');
-  const [cardName, setCardName] = useState('');
-  const [cardNumber, setCardNumber] = useState('');
-  const [expiryDate, setExpiryDate] = useState('');
-  const [cvv, setCvv] = useState('');
+  const { orderData, setOrderData } = useOrder();
+  const { paymentMethod } = orderData;
 
-  const handleConfirm = () => {
-    navigation.navigate('Success');
+
+  const handleConfirm = async () => {
+    // Save payment details in context
+    setOrderData((prev) => ({
+      ...prev,
+      paymentMethod
+    }));
+    console.log(orderData);
+    
+    // Now send all `orderData` to the server
+    try {
+      await axios.post('http://192.168.0.102:9999/order/create', orderData);
+      navigation.navigate('Success');
+    } catch (error) {
+      console.error('Error saving order:', error.response||error.message);
+    }
   };
-
+  const handlePaymentMethodChange = (method) => {
+    setOrderData((prev) => ({
+      ...prev,
+      paymentMethod: method,
+    }));
+  };
   return (
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0} 
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.headernav}>
-        <TouchableOpacity onPress={() => navigation.navigate("Review")}>
-          <Icon name="arrow-back" size={24} color="black" /> 
-        </TouchableOpacity>
-        <Text style={styles.title}>Checkout</Text>
-        <Icon name="shopping-cart" size={24} color="black" />
-      </View>
+        <View style={styles.headernav}>
+          <TouchableOpacity onPress={() => navigation.navigate("Review")}>
+            <Icon name="arrow-back" size={24} color="black" />
+          </TouchableOpacity>
+          <Text style={styles.title}>Checkout</Text>
+          <Icon name="shopping-cart" size={24} color="black" />
+        </View>
         <HeaderProgress currentStep="Payment" navigation={navigation} />
-        
+
         <Text style={styles.label}>Select a Payment Method</Text>
-        
-        <TouchableOpacity onPress={() => setPaymentMethod('Credit Card')} style={styles.option}>
-          <Text>Credit Card</Text>
+
+        <TouchableOpacity
+          onPress={() => handlePaymentMethodChange('Credit Card')}
+          style={[
+            styles.option,
+            paymentMethod === 'Credit Card' && styles.selectedOption // Highlight if selected
+          ]}
+        >
+          <Text style={paymentMethod === 'Credit Card' ? styles.selectedText : null}>Credit Card</Text>
         </TouchableOpacity>
-        
-        <TouchableOpacity onPress={() => setPaymentMethod('PayPal')} style={styles.option}>
-          <Text>PayPal</Text>
+
+        <TouchableOpacity
+          onPress={() => handlePaymentMethodChange('cod')}
+          style={[
+            styles.option,
+            paymentMethod === 'cod' && styles.selectedOption // Highlight if selected
+          ]}
+        >
+          <Text style={paymentMethod === 'cod' ? styles.selectedText : null}>Thanh toán khi nhận hàng</Text>
         </TouchableOpacity>
-        
-        <TouchableOpacity onPress={() => setPaymentMethod('Google Pay')} style={styles.option}>
-          <Text>Google Pay</Text>
+
+        <TouchableOpacity
+          onPress={() => handlePaymentMethodChange('Google Pay')}
+          style={[
+            styles.option,
+            paymentMethod === 'Google Pay' && styles.selectedOption // Highlight if selected
+          ]}
+        >
+          <Text style={paymentMethod === 'Google Pay' ? styles.selectedText : null}>Google Pay</Text>
         </TouchableOpacity>
 
         {paymentMethod === 'Credit Card' && (
@@ -78,10 +115,10 @@ const PaymentScreen = ({ navigation }) => {
             />
           </View>
         )}
-  <TouchableOpacity style={styles.button} onPress={handleConfirm}>
-        <Text style={styles.buttonText}>Confirm</Text>
-      </TouchableOpacity>
-        
+        <TouchableOpacity style={styles.button} onPress={handleConfirm}>
+          <Text style={styles.buttonText}>Confirm</Text>
+        </TouchableOpacity>
+
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -89,18 +126,18 @@ const PaymentScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Đảm bảo chiếm hết màn hình
+    flex: 1,
     backgroundColor: '#fff',
   },
   headernav: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
     alignItems: 'center',
-    marginTop:20,
-    justifyContent: 'space-between', 
+    marginTop: 20,
+    justifyContent: 'space-between',
     width: '100%',
   },
   scrollContainer: {
-    padding: 20, // Khoảng cách trong ScrollView
+    padding: 20,
   },
   label: {
     fontSize: 16,
@@ -112,6 +149,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
     borderRadius: 5,
   },
+  selectedOption: {
+    backgroundColor: '#c8e6c9', // Light green background for selected option
+    borderWidth: 1,
+    borderColor: '#4caf50', // Green border for selected option
+  },
+  selectedText: {
+    fontWeight: 'bold',
+    color: '#4caf50', // Green text for selected option
+  },
   input: {
     borderWidth: 1,
     borderColor: '#ddd',
@@ -120,16 +166,16 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   button: {
-    backgroundColor: 'black', // Black background
-    padding: 15, // Padding around the text
-    borderRadius: 5, // Rounded corners
-    alignItems: 'center', // Center the text
-    marginTop: 20, // Margin on top for spacing
+    backgroundColor: 'black',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 20,
   },
   buttonText: {
-    color: 'white', // White text
-    fontSize: 18, // Font size
-    fontWeight: 'bold', // Bold text
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
   }
 });
 

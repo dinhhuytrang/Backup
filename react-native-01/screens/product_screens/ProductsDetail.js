@@ -74,9 +74,8 @@ export default function ProductDetails() {
     
     try {
       const response =await addNewCart(newCart)
-      if (response.status === 201) {
-        alert(response.data);
-      }
+      alert(response.data);
+
     } catch (error) {
       console.error("Error adding to cart:", error.response || error.message);
       alert("Failed to add product to cart.");
